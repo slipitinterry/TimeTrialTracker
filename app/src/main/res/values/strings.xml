@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TimeTrialTracker</string>
+    <string name="action_clear">Clear Data</string>
+    <string name="list_header_rider">Rider</string>
+    <string name="list_header_time">Time</string>
+
+</resources>
