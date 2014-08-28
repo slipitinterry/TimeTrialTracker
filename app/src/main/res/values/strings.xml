@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TimeTrialTracker</string>
+    <string name="app_name">ACTC TimeTrial Tracker</string>
     <string name="action_clear">Clear Data</string>
     <string name="list_header_rider">Rider</string>
     <string name="list_header_time">Time</string>
-
+    <string name="action_add_rider">Add Rider</string>
+    <string name="action_rider_stats">Rider Stats</string>
+    <string name="action_lap_stats">Lap Stats</string>
+    <string name="title_activity_add_rider">Add Rider</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="acknowledge_delete_riders_title">Clear Riders</string>
+    <string name="acknowledge_delete_riders_msg">Are you sure you want to clear all the riders\' data</string>
+    <string name="dlg_yes">Yes</string>
+    <string name="dlg_cancel">Cancel</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rider_name_hint">Rider Name</string>
+    <string name="add_rider_title">Add Rider</string>
 </resources>

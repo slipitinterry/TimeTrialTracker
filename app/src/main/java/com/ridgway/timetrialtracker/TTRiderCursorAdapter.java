@@ -1,8 +1,5 @@
 package com.ridgway.timetrialtracker;
 
-/**
- * Created by ridgway on 7/27/14.
- */
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -11,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+/**
+ * Created by ridgway on 8/27/14.
+ */
+public class TTRiderCursorAdapter extends CursorAdapter {
 
-public class TTCursorAdapter extends CursorAdapter {
 
-    public TTCursorAdapter(Context context, Cursor c) {
+    public TTRiderCursorAdapter(Context context, Cursor c) {
         super(context, c);
     }
 
@@ -23,7 +23,7 @@ public class TTCursorAdapter extends CursorAdapter {
         // when the view will be created for first time,
         // we need to tell the adapters, how each item will look
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View retView = inflater.inflate(R.layout.listview_oneline_layout, parent, false);
+        View retView = inflater.inflate(R.layout.listview_rider_layout, parent, false);
 
         return retView;
     }
@@ -33,16 +33,11 @@ public class TTCursorAdapter extends CursorAdapter {
         // here we are setting our data
         // that means, take the data from the cursor and put it in views
 
-        TextView textViewRiderNum = (TextView) view.findViewById(R.id.rider_number);
+        TextView textViewRiderNum = (TextView) view.findViewById(R.id.add_rider_number);
         textViewRiderNum.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
 
-        TextView textViewRiderSplit = (TextView) view.findViewById(R.id.rider_name);
-        textViewRiderSplit.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
+        TextView textViewRiderName = (TextView) view.findViewById(R.id.add_rider_name);
+        textViewRiderName.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
 
-        TextView textViewRiderLast = (TextView) view.findViewById(R.id.rider_last_seen);
-        textViewRiderLast.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3))));
-
-        TextView textViewRiderETA = (TextView) view.findViewById(R.id.rider_eta);
-        textViewRiderETA.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(4))));
     }
 }

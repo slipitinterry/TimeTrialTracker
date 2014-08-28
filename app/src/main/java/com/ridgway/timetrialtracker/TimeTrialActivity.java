@@ -1,6 +1,7 @@
 package com.ridgway.timetrialtracker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -9,11 +10,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
 
 public class TimeTrialActivity extends Activity {
+    /** The view to show the ad. */
+    private AdView adView;
+    /* Your ad unit id. Replace with your actual ad unit id. */
+    private static final String AD_UNIT_ID = "ca-app-pub-7604167799487973/6453606842";
+
 
     private long startTime;
     private long elapsedTime;
@@ -24,7 +35,6 @@ public class TimeTrialActivity extends Activity {
 
     private final int REFRESH_RATE = 50;
 
-    private boolean mclear_rider_on_entry = true;
 
     private TTSQLiteHelper db; // Database link for storing response information
     private ListView listView; // Main activity ListView to display recent responses
@@ -61,15 +71,16 @@ public class TimeTrialActivity extends Activity {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                ttAdapter = new TTCursorAdapter(TimeTrialActivity.this, db.getAllData());
+                ttAdapter = new TTCursorAdapter(TimeTrialActivity.this, db.getAllRiderData());
                 listView.setAdapter(ttAdapter);
             }
         });
 
-        // Add a header row to the listview
-        LayoutInflater inflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.listview_header, listView, false);
-        listView.addHeaderView(header, null, false);
+
+        // Create an ad.
+        AdView adView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 
     }
@@ -88,14 +99,27 @@ public class TimeTrialActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_clear) {
-            db.deleteAllRiderSplits();
-            ttAdapter.changeCursor(db.getAllData());
+        if (id == R.id.action_add_rider) {
+            openAddRiderActivity();
+            return true;
+        }
+        if (id == R.id.action_rider_stats) {
+            return true;
+        }
+        if (id == R.id.action_lap_stats) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Respond to the responses list menu item
+     */
+    public void openAddRiderActivity(){
+        // Open the Add Rider panel
+        Intent intent = new Intent(this, AddRider.class);
+        startActivity(intent);
+    }
 
     private void updateTimer (float time){
 
@@ -171,18 +195,22 @@ public class TimeTrialActivity extends Activity {
         resetTimer();
     }
 
+    public void onStartRider (View view){
+
+    }
+
     private void showStopButton(){
         (findViewById(R.id.btnStart)).setVisibility(View.GONE);
         (findViewById(R.id.btnRest)).setVisibility(View.GONE);
         (findViewById(R.id.btnStop)).setVisibility(View.VISIBLE);
-        (findViewById(R.id.btnEnter)).setEnabled(true);
+        (findViewById(R.id.btnStartRider)).setEnabled(true);
     }
 
     private void hideStopButton(){
         (findViewById(R.id.btnStart)).setVisibility(View.VISIBLE);
         (findViewById(R.id.btnRest)).setVisibility(View.VISIBLE);
         (findViewById(R.id.btnStop)).setVisibility(View.GONE);
-        (findViewById(R.id.btnEnter)).setEnabled(false);
+        (findViewById(R.id.btnStartRider)).setEnabled(false);
     }
 
     private void resetTimer(){
@@ -190,92 +218,30 @@ public class TimeTrialActivity extends Activity {
         ((TextView)findViewById(R.id.millis)).setText(".0");
     }
 
-    /**
-     * Handle Clear Button Click
-     * @param v
-     */
-    public void onBtnClear(View v){
-        clearRiderNumber();
-    }
-
-    /**
-     * Handle Enter Button Click
-     * @param v
-     */
-    public void onBtnEnter(View v){
-        TextView txtRider = (TextView)findViewById(R.id.txtRider);
-        String rider = txtRider.getText().toString();
-
-        if(!rider.isEmpty()) {
-            // now write to database
-            db.addRiderSplit(rider, currentElapsedTime + currentMillis);
-            ttAdapter.changeCursor(db.getAllData());
-        }
-
-        // now clear the rider number, ready for the next entry
-        if(mclear_rider_on_entry){
-            clearRiderNumber();
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
         }
     }
 
-    /**
-     * Reset the Rider number value to blank, ready for re-entering,
-     * or after entering a new record.
-     */
-    private void clearRiderNumber(){
-        TextView txtRider = (TextView)findViewById(R.id.txtRider);
-        txtRider.setText("");
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
     }
 
-    /**
-     * Add a new number to the rider number string
-     * @param strNum
-     */
-    private void addCharToRiderNumber(String strNum){
-        TextView txtRider = (TextView)findViewById(R.id.txtRider);
-        String currentTxt = txtRider.getText().toString();
-        String newTxt = currentTxt + strNum;
-        txtRider.setText(newTxt);
+    /** Called before the activity is destroyed. */
+    @Override
+    public void onDestroy() {
+        // Destroy the AdView.
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
-    public void onBtn0(View v){
-        addCharToRiderNumber("0");
-    }
-
-
-    public void onBtn1(View v){
-        addCharToRiderNumber("1");
-    }
-
-    public void onBtn2(View v){
-        addCharToRiderNumber("2");
-    }
-
-    public void onBtn3(View v){
-        addCharToRiderNumber("3");
-    }
-
-    public void onBtn4(View v){
-        addCharToRiderNumber("4");
-    }
-
-    public void onBtn5(View v){
-        addCharToRiderNumber("5");
-    }
-
-    public void onBtn6(View v){
-        addCharToRiderNumber("6");
-    }
-
-    public void onBtn7(View v){
-        addCharToRiderNumber("7");
-    }
-
-    public void onBtn8(View v){
-        addCharToRiderNumber("8");
-    }
-
-    public void onBtn9(View v){
-        addCharToRiderNumber("9");
-    }
 }
