@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -47,6 +48,23 @@ public class AddRiderNameFragment extends DialogFragment {
         builder.setTitle(R.string.add_rider_title);
 
         final EditText riderName = (EditText) view.findViewById(R.id.editRiderName);
+
+        builder.setPositiveButton(R.string.dlg_add, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Enable Timer and Responses!
+                ((AddRider) getActivity()).onDialogPositiveClick(dialogFrag, riderName);
+            }
+        });
+
+        builder.setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+                ((AddRider) getActivity()).onDialogNegativeClick(dialogFrag);
+            }
+        });
+        // Create the AlertDialog object and return it
+        return builder.create();
+
     }
 
 

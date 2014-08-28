@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
 
 import com.ridgway.timetrialtracker.R;
 
-public class AddRider extends Activity {
+public class AddRider extends Activity
+                      implements AddRiderNameFragment.AddRiderNameFragmentListener {
 
     boolean mDebug = true;
 
@@ -50,14 +52,8 @@ public class AddRider extends Activity {
 
     public void onAddRider (View view){
         // open dialog to get rider name from user
-
-
-        // Add rider to database, auto-generate ID, with other fields empty
-        // add to the database
-        db.addRider(rider_name);
-        ttRiderAdapter.changeCursor(db.getAllRiderData());
-
-
+        DialogFragment dialog = new AddRiderNameFragment();
+        dialog.show(getFragmentManager(), "AddRiderNameFragment");
     }
 
 
@@ -124,7 +120,13 @@ public class AddRider extends Activity {
         // Do nothing here. Just to satisfy onClickListener implementation
     }
 
-    public void onDialogPositiveClick(DialogFragment dialog, SeekBar durationBar) {
+    public void onDialogPositiveClick(DialogFragment dialog, EditText riderName) {
+        // Add rider to database, auto-generate ID, with other fields empty
+        // add to the database
+        String rider_name = riderName.getText().toString();
+        db.addRider(rider_name);
+        ttRiderAdapter.changeCursor(db.getAllRiderData());
+        Log.d("TimeTrialTracker", "onDialogPositiveClick: Add Rider Completed.");
 
     }
 

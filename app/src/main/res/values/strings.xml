@@ -13,6 +13,7 @@
     <string name="action_settings">Settings</string>
     <string name="acknowledge_delete_riders_title">Clear Riders</string>
     <string name="acknowledge_delete_riders_msg">Are you sure you want to clear all the riders\' data</string>
+    <string name="dlg_add">Add</string>
     <string name="dlg_yes">Yes</string>
     <string name="dlg_cancel">Cancel</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
