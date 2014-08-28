@@ -76,12 +76,14 @@ public class TimeTrialActivity extends Activity {
             }
         });
 
-
+/*
         // Create an ad.
         AdView adView = (AdView) this.findViewById(R.id.adView);
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adView.setAdUnitId("ca-app-pub-7604167799487973/6453606842");
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
+*/
 
     }
 

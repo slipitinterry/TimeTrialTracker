@@ -39,11 +39,11 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_RIDER = "create table "
-            + TABLE_RIDER + "("
+            + TABLE_RIDER + " ("
             + COLUMN_RIDER_ID + " integer primary key autoincrement, "
             + COLUMN_RIDER_NAME + " text not null, "
             + COLUMN_RIDER_LAST_SEEN + " date, "
-            + COLUMN_RIDER_ETA + "date, "
+            + COLUMN_RIDER_ETA + " date, "
             + COLUMN_RIDER_AVG_LAP + " numeric, "
             + COLUMN_RIDER_STD_DEV + " numeric);";
 

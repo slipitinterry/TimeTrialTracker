@@ -126,17 +126,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.gms.ads.AdView
+<!--    <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        ads:adUnitId="ca-app-pub-7604167799487973/6453606842"
         ads:adSize="SMART_BANNER"
         ads:refreshInterval="60"
         android:padding="5dp">
     </com.google.android.gms.ads.AdView>
-
+-->
 
 </LinearLayout>
