@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -76,6 +77,15 @@ public class TimeTrialActivity extends Activity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView arg0, View view,
+                                    int position, long id) {
+                // user clicked a list item, make it "selected"
+                ttAdapter.setSelectedPosition(position);
+            }
+        });
+
 /*
         // Create an ad.
         AdView adView = (AdView) this.findViewById(R.id.adView);
@@ -125,53 +135,9 @@ public class TimeTrialActivity extends Activity {
 
     private void updateTimer (float time){
 
-        long secs = (long)(time/1000);
-        long mins = (long)((time/1000)/60);
-        long hrs = (long)(((time/1000)/60)/60);
-        long millis = (long)(time);
-
-        /** Convert the seconds to String
-         * and format to ensure it has
-         * a leading zero when required
-         */
-        secs = secs % 60;
-        String seconds = String.valueOf(secs);
-        if(secs == 0){ seconds = "00"; }
-        if(secs <10 && secs > 0){ seconds = "0"+seconds; }
-
-        /* Convert the minutes to String
-         * and format the String
-         */
-        mins = mins % 60;
-        String minutes = String.valueOf(mins);
-        if(mins == 0){ minutes = "00"; }
-        if(mins <10 && mins > 0){ minutes = "0"+minutes; }
-
-        /**
-         * Convert the hours to String
-         * and format the String
-         */
-        String hours = String.valueOf(hrs);
-        if(hrs == 0){ hours = "00"; }
-        if(hrs <10 && hrs > 0){ hours = "0"+hours; }
-
-        /* Although we are not using milliseconds
-         * on the timer in this example
-         * code included in the event that it's wanted
-         */
-        millis = millis % 1000;
-        String milliseconds = String.valueOf(millis);
-        //if(milliseconds.length()==2){ milliseconds = "0"+milliseconds; }
-        //if(milliseconds.length()<=1){ milliseconds = "00"; }
-        //milliseconds = milliseconds.substring(milliseconds.length()-3, milliseconds.length()-2);
-
-        /**
-         * Setting the timer text to the elapsed time
-         */
-        currentElapsedTime = hours + ":" + minutes + ":" + seconds;
-        currentMillis = "."+milliseconds;
-        ((TextView)findViewById(R.id.timer)).setText(currentElapsedTime);
-        ((TextView)findViewById(R.id.millis)).setText(currentMillis);
+        TimeString timeString = Utils.floatToTimeString(time);
+        ((TextView)findViewById(R.id.timer)).setText(timeString.getCurrentElapsedTime());
+        ((TextView)findViewById(R.id.millis)).setText(timeString.getCurrentMillis());
 
     }
 
@@ -198,6 +164,32 @@ public class TimeTrialActivity extends Activity {
     }
 
     public void onStartRider (View view){
+        TextView txtRiderNum = (TextView)findViewById(R.id.rider_number);
+        TextView txtRiderName = (TextView)findViewById(R.id.txtRider);
+        TextView txtRiderTime = (TextView)findViewById(R.id.txtRiderTime);
+
+        // Get the selected rider info
+        int selectedPos = ttAdapter.getSelectedPosition();
+
+        String riderNum = "";
+        String riderName = "";
+        float riderTime = elapsedTime;
+
+        // convert the elapsed milliseconds time into a string we can
+        // set into the textview.
+        TimeString timeString = Utils.floatToTimeString(riderTime);
+        String strRiderTime = timeString.getCurrentElapsedTime() + timeString.getCurrentMillis();
+
+        // write the rider info to the Last Seen Rider views
+        txtRiderNum.setText(riderNum);
+        txtRiderName.setText(riderName);
+        txtRiderTime.setText(strRiderTime);
+
+
+        // write the rider info to the splits table
+        db.addRiderSplit(riderNum, riderTime);
+        db.UpdateRiderLastSeen(riderNum, riderTime);
+        ttAdapter.changeCursor(db.getAllRiderData());
 
     }
 

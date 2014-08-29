@@ -30,7 +30,11 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
             android:name=".AddRider"
-            android:label="@string/title_activity_add_rider" >
+            android:label="@string/title_activity_add_rider"
+            android:parentActivityName=".TimeTrialActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ridgway.timetrialtracker.TimeTrialActivity" />
         </activity>
     </application>
 

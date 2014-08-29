@@ -39,7 +39,7 @@ public class AddRider extends Activity
         // Handler, will handle this stuff.
         // Start this early, so we can get everything else
         // up and running while this goes on. Limits the perceived delay.
-        listView = (ListView) findViewById(R.id.listViewRider);
+        listView = (ListView) findViewById(R.id.listViewAddRider);
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -102,16 +102,6 @@ public class AddRider extends Activity
 
     }
 
-    /**
-     * Methods used for Duration Picker Dialog and receiving
-     * responses and retrieving values from the dialog.
-     */
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new AddRiderNameFragment();
-        dialog.show(getFragmentManager(), "DurationPickerDialog");
-    }
-
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
     // defined by the DurationPickerDialog.DurationPickerDialogListener interface
@@ -124,6 +114,7 @@ public class AddRider extends Activity
         // Add rider to database, auto-generate ID, with other fields empty
         // add to the database
         String rider_name = riderName.getText().toString();
+        Log.d("TimeTrialTracker", "onDialogPositiveClick: Adding Rider: " + rider_name + ".");
         db.addRider(rider_name);
         ttRiderAdapter.changeCursor(db.getAllRiderData());
         Log.d("TimeTrialTracker", "onDialogPositiveClick: Add Rider Completed.");

@@ -35,7 +35,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LAP_TIMESPLIT = "time_split";
 
     private static final String DATABASE_NAME = "tt.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_RIDER = "create table "
@@ -85,7 +85,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     }
 
     // Add a rider split time to the database
-    public void addRiderSplit(String rider, String time){
+    public void addRiderSplit(String rider, float time){
         Log.d("TTSQLiteHelper: addRiderSplit: ", rider + ", " + time);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -115,7 +115,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        values.put(COLUMN_LAP_RIDER, rider); // write rider name
+        values.put(COLUMN_RIDER_NAME, rider); // write rider name
 
         // 3. insert the new number. Date/Time will be added
         // automatically by SQLite, due to the default option on the column.
@@ -125,6 +125,54 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
         // 4. close
         db.close();
+    }
+
+    // update the last seen value for the rider
+    public void UpdateRiderLastSeen(String riderNum, float riderTime){
+        Log.d("TTSQLiteHelper: UpdateRiderLastSeen: ", riderNum + ", " + riderTime);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_LAST_SEEN, riderTime); //write rider split as last seen time
+
+        db.update(TABLE_RIDER, values, where, null);
+    }
+
+    // update the ETA value for a rider
+    public void UpdateRiderETA(String riderNum, float riderETA){
+        Log.d("TTSQLiteHelper: UpdateRiderETA: ", riderNum + ", " + riderETA);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_ETA, riderETA); //write rider split as last seen time
+
+        db.update(TABLE_RIDER, values, where, null);
+    }
+
+    // update the std-dev value for a rider
+    public void UpdateRiderStdDev(String riderNum, float riderStdDev){
+        Log.d("TTSQLiteHelper: UpdateRiderStdDev: ", riderNum + ", " + riderStdDev);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_STD_DEV, riderStdDev); //write rider StdDev as last seen time
+
+        db.update(TABLE_RIDER, values, where, null);
     }
 
     // We want to be able to wipe out the contents of the database
