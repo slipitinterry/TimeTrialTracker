@@ -116,6 +116,10 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_RIDER_NAME, rider); // write rider name
+        values.put(COLUMN_RIDER_LAST_SEEN, 0); // write rider last seen time to zero
+        values.put(COLUMN_RIDER_ETA, 0); // write rider eta to zero
+        values.put(COLUMN_RIDER_AVG_LAP, 0); // write rider average lap time to zero
+        values.put(COLUMN_RIDER_STD_DEV, 0); // write rider lap std-dev to zero
 
         // 3. insert the new number. Date/Time will be added
         // automatically by SQLite, due to the default option on the column.
@@ -136,7 +140,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
 
         values.put(COLUMN_RIDER_LAST_SEEN, riderTime); //write rider split as last seen time
 
@@ -152,7 +156,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
 
         values.put(COLUMN_RIDER_ETA, riderETA); //write rider split as last seen time
 

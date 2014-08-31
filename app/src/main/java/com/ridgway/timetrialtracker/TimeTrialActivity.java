@@ -2,8 +2,10 @@ package com.ridgway.timetrialtracker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -34,6 +37,8 @@ public class TimeTrialActivity extends Activity {
     private String currentElapsedTime;
     private String currentMillis;
 
+    private int selectedRiderPosition;
+
     private final int REFRESH_RATE = 50;
 
 
@@ -51,6 +56,17 @@ public class TimeTrialActivity extends Activity {
         }
     };
 
+    // Create a message handling object as an anonymous class.
+    private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
+            Log.d("TimeTrialActivity: OnItemClickListener: position:", ""+position);
+
+            // user clicked a list item, make it "selected"
+            ttAdapter.setSelectedPosition(position);
+            selectedRiderPosition = position;
+            enableStartRiderButton();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +93,7 @@ public class TimeTrialActivity extends Activity {
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView arg0, View view,
-                                    int position, long id) {
-                // user clicked a list item, make it "selected"
-                ttAdapter.setSelectedPosition(position);
-            }
-        });
-
+        listView.setOnItemClickListener(mMessageClickedHandler);
 /*
         // Create an ad.
         AdView adView = (AdView) this.findViewById(R.id.adView);
@@ -150,6 +158,8 @@ public class TimeTrialActivity extends Activity {
             startTime = System.currentTimeMillis();
         }
         mHandler.postDelayed(startTimer, 0);
+
+        enableStartRiderButton();
     }
 
     public void onStop(View v){
@@ -163,6 +173,7 @@ public class TimeTrialActivity extends Activity {
         resetTimer();
     }
 
+
     public void onStartRider (View view){
         TextView txtRiderNum = (TextView)findViewById(R.id.rider_number);
         TextView txtRiderName = (TextView)findViewById(R.id.txtRider);
@@ -171,8 +182,11 @@ public class TimeTrialActivity extends Activity {
         // Get the selected rider info
         int selectedPos = ttAdapter.getSelectedPosition();
 
-        String riderNum = "";
-        String riderName = "";
+        Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
+
+
+        String riderNum = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(0)));
+        String riderName = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1)));
         float riderTime = elapsedTime;
 
         // convert the elapsed milliseconds time into a string we can
@@ -191,13 +205,35 @@ public class TimeTrialActivity extends Activity {
         db.UpdateRiderLastSeen(riderNum, riderTime);
         ttAdapter.changeCursor(db.getAllRiderData());
 
+        // set the selected position back to the top
+        ttAdapter.setSelectedPosition(0);
+
+    }
+
+    private void enableStartRiderButton(){
+        int stopButtonVisibility = (findViewById(R.id.btnStop)).getVisibility();
+        if(stopButtonVisibility == View.VISIBLE) {
+            Button riderBtnStart = (Button)(findViewById(R.id.btnStartRider));
+            riderBtnStart.setEnabled(true);
+
+            int selectedPos = ttAdapter.getSelectedPosition();
+            Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
+
+
+            String riderLast = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+            if(riderLast == "0"){
+                riderBtnStart.setText(getResources().getString(R.string.riderBtnStart));
+            }
+            else{
+                riderBtnStart.setText(getResources().getString(R.string.riderBtnCheckin));
+            }
+        }
     }
 
     private void showStopButton(){
         (findViewById(R.id.btnStart)).setVisibility(View.GONE);
         (findViewById(R.id.btnRest)).setVisibility(View.GONE);
         (findViewById(R.id.btnStop)).setVisibility(View.VISIBLE);
-        (findViewById(R.id.btnStartRider)).setEnabled(true);
     }
 
     private void hideStopButton(){

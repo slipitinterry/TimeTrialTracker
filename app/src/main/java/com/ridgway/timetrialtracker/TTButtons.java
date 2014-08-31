@@ -38,7 +38,7 @@ public class TTButtons  extends Activity {
 
         if(!rider.isEmpty()) {
             // now write to database
-            db.addRiderSplit(rider, currentElapsedTime + currentMillis);
+            //db.addRiderSplit(rider, currentElapsedTime + currentMillis);
             ttAdapter.changeCursor(db.getAllRiderData());
         }
 

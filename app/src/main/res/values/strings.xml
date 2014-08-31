@@ -14,9 +14,13 @@
     <string name="acknowledge_delete_riders_title">Clear Riders</string>
     <string name="acknowledge_delete_riders_msg">Are you sure you want to clear all the riders\' data</string>
     <string name="dlg_add">Add</string>
+    <string name="dlg_next">Next</string>
     <string name="dlg_yes">Yes</string>
     <string name="dlg_cancel">Cancel</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rider_name_hint">Rider Name</string>
     <string name="add_rider_title">Add Rider</string>
+    <string name="riderBtnStart">Start Rider</string>
+    <string name="riderBtnCheckin">Checkin Rider</string>
+
 </resources>

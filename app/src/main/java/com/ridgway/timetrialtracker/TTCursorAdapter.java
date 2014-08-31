@@ -18,10 +18,12 @@ public class TTCursorAdapter extends CursorAdapter {
 
     // used to keep selected position in ListView
     private int selectedPos = -1;	// init value for not-selected
+    private Context context;
 
 
     public TTCursorAdapter(Context context, Cursor c) {
         super(context, c);
+        this.context = context;
     }
 
     @Override
@@ -62,28 +64,51 @@ public class TTCursorAdapter extends CursorAdapter {
         return selectedPos;
     }
 
-    @Override
+   @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
+        View view = convertView;
 
         // only inflate the view if it's null
-        if (v == null) {
+        if (view == null) {
             LayoutInflater vi
-                    = (LayoutInflater)v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.listview_oneline_layout, null);
+                    = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = vi.inflate(R.layout.listview_oneline_layout, null);
         }
 
-        // get text view
-        LinearLayout label = (LinearLayout)v.findViewById(R.id.rider_layout);
+       Cursor cursor = (Cursor) getItem(position);
+
+       TextView textViewRiderNum = (TextView) view.findViewById(R.id.rider_number);
+       textViewRiderNum.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(0))));
+
+       TextView textViewRiderSplit = (TextView) view.findViewById(R.id.rider_name);
+       textViewRiderSplit.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
+
+       TextView textViewRiderLast = (TextView) view.findViewById(R.id.rider_last_seen);
+       String strLast = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+       if(strLast == null || strLast.isEmpty()){ strLast = "0"; }
+       TimeString tsRiderLast = Utils.floatToTimeString(Float.parseFloat(strLast));
+       textViewRiderLast.setText(tsRiderLast.getCurrentElapsedTime());
+
+       TextView textViewRiderETA = (TextView) view.findViewById(R.id.rider_eta);
+       String strETA = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3)));
+       if(strETA == null || strETA.isEmpty()){ strETA = "0"; }
+       TimeString tsRiderETA = Utils.floatToTimeString(Float.parseFloat(strETA));
+       textViewRiderETA.setText(tsRiderETA.getCurrentElapsedTime());
+
+       // get text view
+       LinearLayout rider = (LinearLayout)view.findViewById(R.id.rider_layout);
+       LinearLayout data = (LinearLayout)view.findViewById(R.id.rider_data);
 
         // change the row color based on selected state
         if(selectedPos == position){
-            label.setBackgroundColor(Color.CYAN);
+            rider.setBackgroundColor(Color.CYAN);
+            data.setBackgroundColor(Color.CYAN);
         }else{
-            label.setBackgroundColor(Color.WHITE);
+            rider.setBackgroundColor(Color.WHITE);
+            data.setBackgroundColor(Color.WHITE);
         }
 
-        return(v);
+        return(view);
     }
 
 }

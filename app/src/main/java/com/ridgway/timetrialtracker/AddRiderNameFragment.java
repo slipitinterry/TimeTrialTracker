@@ -22,13 +22,18 @@ public class AddRiderNameFragment extends DialogFragment {
     // Use this instance of the interface to deliver action events
     AddRiderNameFragmentListener mListener;
     private final DialogFragment dialogFrag = this;
+    private AlertDialog innerDlg;
+    private EditText riderName = null;
 
+    public AlertDialog getInnerAlertDialog(){ return innerDlg; }
+    public EditText getRiderName() { return riderName; }
 
     /* The activity that creates an instance of this dialog fragment must
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface AddRiderNameFragmentListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogPositiveClick(DialogFragment dialog, EditText riderName);
+        public void onDialogNeutralClick(DialogFragment dialog, EditText riderName);
         public void onDialogNegativeClick(DialogFragment dialog);
     }
 
@@ -47,12 +52,19 @@ public class AddRiderNameFragment extends DialogFragment {
         builder.setView(view);
         builder.setTitle(R.string.add_rider_title);
 
-        final EditText riderName = (EditText) view.findViewById(R.id.editRiderName);
+        riderName = (EditText) view.findViewById(R.id.editRiderName);
 
         builder.setPositiveButton(R.string.dlg_add, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // Enable Timer and Responses!
+                // Add Rider to the database!
                 ((AddRider) getActivity()).onDialogPositiveClick(dialogFrag, riderName);
+            }
+        });
+
+        builder.setNeutralButton(R.string.dlg_next, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Add Rider to the database!
+                ((AddRider) getActivity()).onDialogNeutralClick(dialogFrag, riderName);
             }
         });
 
@@ -63,7 +75,8 @@ public class AddRiderNameFragment extends DialogFragment {
             }
         });
         // Create the AlertDialog object and return it
-        return builder.create();
+        innerDlg = builder.create();
+        return innerDlg;
 
     }
 

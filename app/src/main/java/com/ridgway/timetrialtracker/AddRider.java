@@ -52,7 +52,7 @@ public class AddRider extends Activity
 
     public void onAddRider (View view){
         // open dialog to get rider name from user
-        DialogFragment dialog = new AddRiderNameFragment();
+        AddRiderNameFragment dialog = new AddRiderNameFragment();
         dialog.show(getFragmentManager(), "AddRiderNameFragment");
     }
 
@@ -105,11 +105,8 @@ public class AddRider extends Activity
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
     // defined by the DurationPickerDialog.DurationPickerDialogListener interface
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        // Do nothing here. Just to satisfy onClickListener implementation
-    }
 
+    @Override
     public void onDialogPositiveClick(DialogFragment dialog, EditText riderName) {
         // Add rider to database, auto-generate ID, with other fields empty
         // add to the database
@@ -118,6 +115,22 @@ public class AddRider extends Activity
         db.addRider(rider_name);
         ttRiderAdapter.changeCursor(db.getAllRiderData());
         Log.d("TimeTrialTracker", "onDialogPositiveClick: Add Rider Completed.");
+
+    }
+
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog, EditText riderName) {
+        // Add rider to database, auto-generate ID, with other fields empty
+        // add to the database
+        String rider_name = riderName.getText().toString();
+        Log.d("TimeTrialTracker", "onDialogNeutralClick: Adding Rider: " + rider_name + ".");
+        db.addRider(rider_name);
+        ttRiderAdapter.changeCursor(db.getAllRiderData());
+        Log.d("TimeTrialTracker", "onDialogNeutralClick: Add Rider Completed.");
+
+        // open a new dialog to get an additional rider name from user
+        AddRiderNameFragment dlgRider = new AddRiderNameFragment();
+        dlgRider.show(getFragmentManager(), "AddRiderNameFragment");
 
     }
 

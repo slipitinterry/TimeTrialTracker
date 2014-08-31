@@ -24,6 +24,7 @@
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:inputType="textCapWords" />
 
  </LinearLayout>
