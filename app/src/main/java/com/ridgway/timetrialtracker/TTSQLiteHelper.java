@@ -27,15 +27,15 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_RIDER_STD_DEV = "std_dev";
 
 
-
-
     public static final String TABLE_LAP = "timetriallap";
     public static final String COLUMN_LAP_ID = "_id";
     public static final String COLUMN_LAP_RIDER = "rider_id";
     public static final String COLUMN_LAP_TIMESPLIT = "time_split";
 
+    private static final String VIEW_LAP_STATS = "view_laps_stats";
+
     private static final String DATABASE_NAME = "tt.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_RIDER = "create table "
@@ -52,14 +52,23 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
             + TABLE_LAP + "("
             + COLUMN_LAP_ID + " integer primary key autoincrement, "
             + COLUMN_LAP_RIDER + " integer not null, "
-            + COLUMN_LAP_TIMESPLIT + " text not null);";
+            + COLUMN_LAP_TIMESPLIT + " date not null);";
+
+    private static final String VIEW_CREATE_ALL_LAPS_WITH_RIDERS = "CREATE VIEW " + VIEW_LAP_STATS + " AS "
+            + " SELECT "
+            + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", "
+            + TABLE_RIDER+"."+COLUMN_RIDER_NAME + ", "
+            + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT
+            + " FROM " + TABLE_LAP + ", " + TABLE_RIDER
+            + " WHERE " + TABLE_LAP+"."+COLUMN_LAP_RIDER + "=" + TABLE_RIDER+"."+COLUMN_RIDER_ID
+            + " ORDER BY " + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", " + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT + ";";
 
 
     private static final String QUERY_ALL_RIDERS = "SELECT * FROM " + TABLE_RIDER
-            + " ORDER BY " + COLUMN_RIDER_ETA + ", " + COLUMN_RIDER_LAST_SEEN + ", " + COLUMN_RIDER_ID;
+            + " ORDER BY " + COLUMN_RIDER_ETA + ", " + COLUMN_RIDER_LAST_SEEN + ", " + COLUMN_RIDER_ID + ";";
 
     private static final String QUERY_ALL_LAPS = "SELECT * FROM " + TABLE_LAP
-            + " ORDER BY " + COLUMN_LAP_RIDER + ", " + COLUMN_LAP_ID;
+            + " ORDER BY " + COLUMN_LAP_RIDER + ", " + COLUMN_LAP_ID + ";";
 
 
     public TTSQLiteHelper(Context context) {
@@ -71,6 +80,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         Log.w(TTSQLiteHelper.class.getName(), "Create the SQLite Database to track riders & splits");
         database.execSQL(DATABASE_CREATE_RIDER);
         database.execSQL(DATABASE_CREATE_LAPS);
+        database.execSQL(VIEW_CREATE_ALL_LAPS_WITH_RIDERS);
     }
 
     @Override
@@ -78,9 +88,9 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         Log.w(TTSQLiteHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RIDER);
-        onCreate(db);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LAP);
+        db.execSQL("DROP VIEW IF EXISTS " + VIEW_LAP_STATS + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RIDER + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LAP + ";");
         onCreate(db);
     }
 
@@ -145,6 +155,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_RIDER_LAST_SEEN, riderTime); //write rider split as last seen time
 
         db.update(TABLE_RIDER, values, where, null);
+        db.close();
     }
 
     // update the ETA value for a rider
@@ -161,6 +172,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_RIDER_ETA, riderETA); //write rider split as last seen time
 
         db.update(TABLE_RIDER, values, where, null);
+        db.close();
     }
 
     // update the std-dev value for a rider
@@ -177,6 +189,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_RIDER_STD_DEV, riderStdDev); //write rider StdDev as last seen time
 
         db.update(TABLE_RIDER, values, where, null);
+        db.close();
     }
 
     // We want to be able to wipe out the contents of the database
@@ -225,7 +238,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     // Get all the stored responses
     public List<Integer> getAllLaps() {
-        List<Integer> responses = new LinkedList<Integer>();
+        List<Integer> laps = new LinkedList<Integer>();
 
         // get reference to writable DB
         SQLiteDatabase db = this.getReadableDatabase();
@@ -239,25 +252,20 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
                 Log.d("TTSQLiteHelper: getAllLaps()", ""+id);
 
                 // Add response id to list
-                responses.add(id);
+                laps.add(id);
             } while (cursor.moveToNext());
         }
 
+        db.close();
+
         // return books
-        return responses;
+        return laps;
     }
 
     // Get all the data return the appropriate Cursor.
     public Cursor getAllLapDataAndRiderName(){
 
-        String QUERY_ALL_LAPS_WITH_RIDERS = "SELECT "
-                + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", "
-                + TABLE_RIDER+"."+COLUMN_RIDER_NAME + ", "
-                + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT
-                + " FROM " + TABLE_LAP + ", " + TABLE_RIDER
-                + " WHERE " + TABLE_LAP+"."+COLUMN_LAP_RIDER + "=" + TABLE_RIDER+"."+COLUMN_RIDER_ID
-                + " ORDER BY " + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", " + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT;
-
+        String QUERY_ALL_LAPS_WITH_RIDERS = "SELECT * FROM " + VIEW_LAP_STATS +";";
 
         Log.d("TTSQLiteHelper", "getAllLapDataAndRiderName SQL: " + QUERY_ALL_LAPS_WITH_RIDERS);
 
@@ -315,7 +323,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     public int getRiderSplitCount(String number) {
         String countQuery = "SELECT  * FROM " + TABLE_LAP
-                + " WHERE " + COLUMN_RIDER_ID + "='" + number + "'";
+                + " WHERE " + COLUMN_RIDER_ID + "='" + number + "';";
 
         Log.d("TTSQLiteHelper: getResponseCount", "Query String: " + countQuery);
 

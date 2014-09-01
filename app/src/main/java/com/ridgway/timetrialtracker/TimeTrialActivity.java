@@ -239,8 +239,14 @@ public class TimeTrialActivity extends Activity {
             int selectedPos = ttAdapter.getSelectedPosition();
             Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
 
+            String riderLast = "0";
+            if(selectedPos >= 0) {
+                // If something is selected, check the last seen time so
+                // we can adjust the button text for Start vs. Checkin
+                riderLast = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+                Log.d("TimeTrialActivity: enableStartRiderButton: riderLastSeen:", ""+riderLast);
+            }
 
-            String riderLast = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
             if(riderLast == "0"){
                 riderBtnStart.setText(getResources().getString(R.string.riderBtnStart));
             }

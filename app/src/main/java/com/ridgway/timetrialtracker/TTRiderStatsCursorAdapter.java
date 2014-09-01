@@ -39,13 +39,13 @@ public class TTRiderStatsCursorAdapter extends CursorAdapter {
         textViewRiderName.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
 
         TextView textViewRiderAvgLap = (TextView) view.findViewById(R.id.rider_avglap);
-        String strAvgLap = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+        String strAvgLap = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(4)));
         if(strAvgLap == null || strAvgLap.isEmpty()){ strAvgLap = "0"; }
         TimeString tsAvgLap = Utils.floatToTimeString(Float.parseFloat(strAvgLap));
         textViewRiderAvgLap.setText(tsAvgLap.getCurrentElapsedTime());
 
         TextView textViewRiderStdDev = (TextView) view.findViewById(R.id.rider_std_dev);
-        textViewRiderStdDev.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3))));
+        textViewRiderStdDev.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(5))));
 
     }
 

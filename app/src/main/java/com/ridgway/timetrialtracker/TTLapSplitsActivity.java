@@ -31,7 +31,7 @@ public class TTLapSplitsActivity extends Activity {
         // Handler, will handle this stuff.
         // Start this early, so we can get everything else
         // up and running while this goes on. Limits the perceived delay.
-        listView = (ListView) findViewById(R.id.listViewAddRider);
+        listView = (ListView) findViewById(R.id.listViewLapSplits);
         new Handler().post(new Runnable() {
             @Override
             public void run() {
