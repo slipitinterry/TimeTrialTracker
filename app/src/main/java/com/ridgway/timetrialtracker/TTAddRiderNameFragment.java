@@ -17,7 +17,7 @@ import android.widget.EditText;
 /**
  *
  */
-public class AddRiderNameFragment extends DialogFragment {
+public class TTAddRiderNameFragment extends DialogFragment {
 
     // Use this instance of the interface to deliver action events
     AddRiderNameFragmentListener mListener;
@@ -57,21 +57,21 @@ public class AddRiderNameFragment extends DialogFragment {
         builder.setPositiveButton(R.string.dlg_add, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // Add Rider to the database!
-                ((AddRider) getActivity()).onDialogPositiveClick(dialogFrag, riderName);
+                ((TTAddRider) getActivity()).onDialogPositiveClick(dialogFrag, riderName);
             }
         });
 
         builder.setNeutralButton(R.string.dlg_next, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // Add Rider to the database!
-                ((AddRider) getActivity()).onDialogNeutralClick(dialogFrag, riderName);
+                ((TTAddRider) getActivity()).onDialogNeutralClick(dialogFrag, riderName);
             }
         });
 
         builder.setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
-                ((AddRider) getActivity()).onDialogNegativeClick(dialogFrag);
+                ((TTAddRider) getActivity()).onDialogNegativeClick(dialogFrag);
             }
         });
         // Create the AlertDialog object and return it

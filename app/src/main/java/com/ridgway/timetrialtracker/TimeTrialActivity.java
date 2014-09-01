@@ -124,20 +124,40 @@ public class TimeTrialActivity extends Activity {
             return true;
         }
         if (id == R.id.action_rider_stats) {
+            openRiderStatsActivity();
             return true;
         }
         if (id == R.id.action_lap_stats) {
+            openLapStatsActivity();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     /**
-     * Respond to the responses list menu item
+     * Respond to the Add Rider menu item
      */
     public void openAddRiderActivity(){
         // Open the Add Rider panel
-        Intent intent = new Intent(this, AddRider.class);
+        Intent intent = new Intent(this, TTAddRider.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Respond to the Lap Stats  menu item
+     */
+    public void openLapStatsActivity(){
+        // Open the Add Rider panel
+        Intent intent = new Intent(this, TTLapSplitsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Respond to the Rider Stats  menu item
+     */
+    public void openRiderStatsActivity(){
+        // Open the Add Rider panel
+        Intent intent = new Intent(this, TTRiderStats.class);
         startActivity(intent);
     }
 

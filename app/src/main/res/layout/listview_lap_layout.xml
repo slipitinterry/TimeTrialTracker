@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView android:id="@+id/add_rider_number"
+        <TextView android:id="@+id/lap_rider_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -18,15 +18,26 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
 
-        <TextView android:id="@+id/add_rider_name"
+        <TextView android:id="@+id/lap_rider_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:text="rider name"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
+
+        <TextView android:id="@+id/lap_rider_split"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="rider slpit"
+            android:textSize="20sp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
     </LinearLayout>
 
 </LinearLayout>

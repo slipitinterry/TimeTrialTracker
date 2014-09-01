@@ -16,8 +16,8 @@ import android.widget.SeekBar;
 
 import com.ridgway.timetrialtracker.R;
 
-public class AddRider extends Activity
-                      implements AddRiderNameFragment.AddRiderNameFragmentListener {
+public class TTAddRider extends Activity
+                      implements TTAddRiderNameFragment.AddRiderNameFragmentListener {
 
     boolean mDebug = true;
 
@@ -43,7 +43,7 @@ public class AddRider extends Activity
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                ttRiderAdapter = new TTRiderCursorAdapter(AddRider.this, db.getAllRiderData());
+                ttRiderAdapter = new TTRiderCursorAdapter(TTAddRider.this, db.getAllRiderData());
                 listView.setAdapter(ttRiderAdapter);
             }
         });
@@ -52,8 +52,8 @@ public class AddRider extends Activity
 
     public void onAddRider (View view){
         // open dialog to get rider name from user
-        AddRiderNameFragment dialog = new AddRiderNameFragment();
-        dialog.show(getFragmentManager(), "AddRiderNameFragment");
+        TTAddRiderNameFragment dialog = new TTAddRiderNameFragment();
+        dialog.show(getFragmentManager(), "TTAddRiderNameFragment");
     }
 
 
@@ -129,7 +129,7 @@ public class AddRider extends Activity
         Log.d("TimeTrialTracker", "onDialogNeutralClick: Add Rider Completed.");
 
         // open a new dialog to get an additional rider name from user
-        AddRiderNameFragment dlgRider = new AddRiderNameFragment();
+        TTAddRiderNameFragment dlgRider = new TTAddRiderNameFragment();
         dlgRider.show(getFragmentManager(), "AddRiderNameFragment");
 
     }

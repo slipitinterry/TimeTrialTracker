@@ -248,12 +248,21 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     }
 
     // Get all the data return the appropriate Cursor.
-    public Cursor getAllLapData(){
+    public Cursor getAllLapDataAndRiderName(){
 
-        Log.d("TTSQLiteHelper", "getAllData SQL: " + QUERY_ALL_LAPS);
+        String QUERY_ALL_LAPS_WITH_RIDERS = "SELECT "
+                + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", "
+                + TABLE_RIDER+"."+COLUMN_RIDER_NAME + ", "
+                + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT
+                + " FROM " + TABLE_LAP + ", " + TABLE_RIDER
+                + " WHERE " + TABLE_LAP+"."+COLUMN_LAP_RIDER + "=" + TABLE_RIDER+"."+COLUMN_RIDER_ID
+                + " ORDER BY " + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", " + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT;
+
+
+        Log.d("TTSQLiteHelper", "getAllLapDataAndRiderName SQL: " + QUERY_ALL_LAPS_WITH_RIDERS);
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(QUERY_ALL_LAPS, null);
+        return db.rawQuery(QUERY_ALL_LAPS_WITH_RIDERS, null);
     }
 
     // Get all the data return the appropriate Cursor.

@@ -29,8 +29,24 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name=".AddRider"
+            android:name=".TTAddRider"
             android:label="@string/title_activity_add_rider"
+            android:parentActivityName=".TimeTrialActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ridgway.timetrialtracker.TimeTrialActivity" />
+        </activity>
+        <activity
+            android:name=".TTLapSplitsActivity"
+            android:label="@string/title_activity_ttlap_splits"
+            android:parentActivityName=".TimeTrialActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ridgway.timetrialtracker.TimeTrialActivity" />
+        </activity>
+        <activity
+            android:name=".TTRiderStats"
+            android:label="@string/title_activity_ttrider_stats"
             android:parentActivityName=".TimeTrialActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
