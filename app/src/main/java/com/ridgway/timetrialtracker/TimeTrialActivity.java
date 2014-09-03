@@ -222,12 +222,20 @@ public class TimeTrialActivity extends Activity {
 
         // write the rider info to the splits table
         db.addRiderSplit(riderNum, riderTime);
-        db.UpdateRiderLastSeen(riderNum, riderTime);
-        ttAdapter.changeCursor(db.getAllRiderData());
+        db.updateRiderLastSeen(riderNum, riderTime);
+        updateDataChanged();
 
         // set the selected position back to the top
         ttAdapter.setSelectedPosition(0);
 
+        // In a background tasks, Run through all the laps for this rider
+        // and update the avg lap and std-dev values in the table
+        new TTStdDevAsyncTask(getApplicationContext()).execute(riderNum);
+
+    }
+
+    public void updateDataChanged(){
+        ttAdapter.changeCursor(db.getAllRiderData());
     }
 
     private void enableStartRiderButton(){

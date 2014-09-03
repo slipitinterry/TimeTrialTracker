@@ -141,8 +141,31 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // get the last seen value for the rider
+    public float getRiderLastSeen(String riderNum){
+        Log.d("TTSQLiteHelper: getRiderLastSeen: ", riderNum );
+        // 1. get reference to readable DB
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String QUERY_RIDER = "SELECT * FROM " + TABLE_RIDER
+                + " WHERE " + COLUMN_RIDER_ID + "=" + riderNum + ";"; // use rider id as key to query
+
+        Cursor cursor = db.rawQuery(QUERY_RIDER, null);
+
+        // find the first row, grab the Last Seen column value
+        float last_seen = 0.0f;
+        if (cursor.moveToFirst()) {
+            last_seen = Integer.parseInt(cursor.getString(2));
+            Log.d("TTSQLiteHelper: getRiderLastSeen()", "" + last_seen);
+
+            db.close();
+        }
+
+        return last_seen;
+    }
+
     // update the last seen value for the rider
-    public void UpdateRiderLastSeen(String riderNum, float riderTime){
+    public void updateRiderLastSeen(String riderNum, float riderTime){
         Log.d("TTSQLiteHelper: UpdateRiderLastSeen: ", riderNum + ", " + riderTime);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -159,7 +182,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     }
 
     // update the ETA value for a rider
-    public void UpdateRiderETA(String riderNum, float riderETA){
+    public void updateRiderETA(String riderNum, float riderETA){
         Log.d("TTSQLiteHelper: UpdateRiderETA: ", riderNum + ", " + riderETA);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -169,14 +192,32 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
         String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
 
-        values.put(COLUMN_RIDER_ETA, riderETA); //write rider split as last seen time
+        values.put(COLUMN_RIDER_ETA, riderETA); //write rider eta
 
         db.update(TABLE_RIDER, values, where, null);
         db.close();
     }
 
+    // update the ETA value for a rider
+    public void updateRiderAvgLap(String riderNum, float riderAvg){
+        Log.d("TTSQLiteHelper: UpdateRiderETA: ", riderNum + ", " + riderAvg);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_AVG_LAP, riderAvg); //write rider avg
+
+        db.update(TABLE_RIDER, values, where, null);
+        db.close();
+    }
+
+
     // update the std-dev value for a rider
-    public void UpdateRiderStdDev(String riderNum, float riderStdDev){
+    public void updateRiderStdDev(String riderNum, float riderStdDev){
         Log.d("TTSQLiteHelper: UpdateRiderStdDev: ", riderNum + ", " + riderStdDev);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -186,7 +227,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
         String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
 
-        values.put(COLUMN_RIDER_STD_DEV, riderStdDev); //write rider StdDev as last seen time
+        values.put(COLUMN_RIDER_STD_DEV, riderStdDev); //write rider StdDev
 
         db.update(TABLE_RIDER, values, where, null);
         db.close();
@@ -214,9 +255,9 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     // Get all the stored responses
     public List<Integer> getAllRiders() {
-        List<Integer> responses = new LinkedList<Integer>();
+        List<Integer> riders = new LinkedList<Integer>();
 
-        // get reference to writable DB
+        // get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(QUERY_ALL_RIDERS, null);
 
@@ -225,22 +266,22 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 id = Integer.parseInt(cursor.getString(0));
-                Log.d("TTSQLiteHelper: getAllRiderSplits()", ""+id);
+                Log.d("TTSQLiteHelper: getAllRiders()", ""+id);
 
                 // Add response id to list
-                responses.add(id);
+                riders.add(id);
             } while (cursor.moveToNext());
         }
 
         // return books
-        return responses;
+        return riders;
     }
 
     // Get all the stored responses
     public List<Integer> getAllLaps() {
         List<Integer> laps = new LinkedList<Integer>();
 
-        // get reference to writable DB
+        // get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(QUERY_ALL_LAPS, null);
 
@@ -261,6 +302,40 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         // return books
         return laps;
     }
+
+    // Get all the stored laps for a specified rider
+    public List<Float> getAllRiderLaps(String riderNum) {
+
+        List<Float> laps = new LinkedList<Float>();
+
+        // Setup Query
+        String QUERY_ALL_RIDER_LAPS = "SELECT * FROM " + TABLE_LAP
+                + " WHERE " + COLUMN_LAP_RIDER + "=" + riderNum
+                + " ORDER BY " + COLUMN_LAP_TIMESPLIT + ";";
+
+
+        // get reference to readable DB
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(QUERY_ALL_RIDER_LAPS, null);
+
+        // go over each row, grab the id column value and add it to list
+        Float lap_split;
+        if (cursor.moveToFirst()) {
+            do {
+                lap_split = Float.parseFloat(cursor.getString(2));
+                Log.d("TTSQLiteHelper: getAllRiderLaps()", ""+lap_split);
+
+                // Add response id to list
+                laps.add(lap_split);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+
+        // return laps list
+        return laps;
+    }
+
 
     // Get all the data return the appropriate Cursor.
     public Cursor getAllLapDataAndRiderName(){
