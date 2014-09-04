@@ -32,6 +32,7 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
             // table for this rider, so let's start by gathering all
             // of the laps.
             Log.d("TTStdDevAsyncTask: doInBackground", "We have multiple Laps");
+            db.updateRiderLapCount(riderNum, count - 1);
 
 
             // Once we have all the laps, create an array of lap times
@@ -118,6 +119,12 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
 
     protected void onPostExecute(Long result) {
         Log.d("TTStdDevAsyncTask: onPostExecute", "DONE!");
+        if(mContext instanceof TimeTrialActivity){
+            ((TimeTrialActivity)mContext).updateDataChanged();
+        }
+        else{
+            Log.d("TTStdDevAsyncTask: onPostExecute", "WRONG CONTEXT! Can't update ListView!");
+        }
     }
 
 }

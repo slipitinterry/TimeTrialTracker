@@ -88,7 +88,7 @@ public class TimeTrialActivity extends Activity {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                ttAdapter = new TTCursorAdapter(TimeTrialActivity.this, db.getAllRiderData());
+                ttAdapter = new TTCursorAdapter(TimeTrialActivity.this, db.getAllMainScreenRiderData());
                 listView.setAdapter(ttAdapter);
             }
         });
@@ -180,6 +180,9 @@ public class TimeTrialActivity extends Activity {
         mHandler.postDelayed(startTimer, 0);
 
         enableStartRiderButton();
+
+        // set the selected listview position to the top
+        ttAdapter.setSelectedPosition(0);
     }
 
     public void onStop(View v){
@@ -235,7 +238,7 @@ public class TimeTrialActivity extends Activity {
     }
 
     public void updateDataChanged(){
-        ttAdapter.changeCursor(db.getAllRiderData());
+        ttAdapter.changeCursor(db.getAllMainScreenRiderData());
     }
 
     private void enableStartRiderButton(){
@@ -255,7 +258,7 @@ public class TimeTrialActivity extends Activity {
                 Log.d("TimeTrialActivity: enableStartRiderButton: riderLastSeen:", ""+riderLast);
             }
 
-            if(riderLast == "0"){
+            if(riderLast.compareTo("0") == 0){
                 riderBtnStart.setText(getResources().getString(R.string.riderBtnStart));
             }
             else{

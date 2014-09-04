@@ -25,7 +25,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_RIDER_ETA = "eta";
     public static final String COLUMN_RIDER_AVG_LAP = "avg_lap";
     public static final String COLUMN_RIDER_STD_DEV = "std_dev";
-
+    public static final String COLUMN_RIDER_LAP_COUNT = "lap_count";
 
     public static final String TABLE_LAP = "timetriallap";
     public static final String COLUMN_LAP_ID = "_id";
@@ -35,7 +35,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     private static final String VIEW_LAP_STATS = "view_laps_stats";
 
     private static final String DATABASE_NAME = "tt.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_RIDER = "create table "
@@ -45,7 +45,8 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_RIDER_LAST_SEEN + " date, "
             + COLUMN_RIDER_ETA + " date, "
             + COLUMN_RIDER_AVG_LAP + " numeric, "
-            + COLUMN_RIDER_STD_DEV + " numeric);";
+            + COLUMN_RIDER_STD_DEV + " numeric,"
+            + COLUMN_RIDER_LAP_COUNT + " integer);";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_LAPS = "create table "
@@ -58,7 +59,8 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
             + " SELECT "
             + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", "
             + TABLE_RIDER+"."+COLUMN_RIDER_NAME + ", "
-            + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT
+            + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT + ", "
+            + TABLE_RIDER+"."+COLUMN_RIDER_ID
             + " FROM " + TABLE_LAP + ", " + TABLE_RIDER
             + " WHERE " + TABLE_LAP+"."+COLUMN_LAP_RIDER + "=" + TABLE_RIDER+"."+COLUMN_RIDER_ID
             + " ORDER BY " + TABLE_LAP+"."+COLUMN_LAP_RIDER + ", " + TABLE_LAP+"."+COLUMN_LAP_TIMESPLIT + ";";
@@ -66,6 +68,9 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String QUERY_ALL_RIDERS = "SELECT * FROM " + TABLE_RIDER
             + " ORDER BY " + COLUMN_RIDER_ETA + ", " + COLUMN_RIDER_LAST_SEEN + ", " + COLUMN_RIDER_ID + ";";
+
+    private static final String QUERY_ALL_RIDERS_DATA = "SELECT * FROM " + TABLE_RIDER
+            + " ORDER BY " + COLUMN_RIDER_ID + ";";
 
     private static final String QUERY_ALL_LAPS = "SELECT * FROM " + TABLE_LAP
             + " ORDER BY " + COLUMN_LAP_RIDER + ", " + COLUMN_LAP_ID + ";";
@@ -130,6 +135,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_RIDER_ETA, 0); // write rider eta to zero
         values.put(COLUMN_RIDER_AVG_LAP, 0); // write rider average lap time to zero
         values.put(COLUMN_RIDER_STD_DEV, 0); // write rider lap std-dev to zero
+        values.put(COLUMN_RIDER_LAP_COUNT, 0); // write rider lap std-dev to zero
 
         // 3. insert the new number. Date/Time will be added
         // automatically by SQLite, due to the default option on the column.
@@ -166,7 +172,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     // update the last seen value for the rider
     public void updateRiderLastSeen(String riderNum, float riderTime){
-        Log.d("TTSQLiteHelper: UpdateRiderLastSeen: ", riderNum + ", " + riderTime);
+        Log.d("TTSQLiteHelper: updateRiderLastSeen: ", riderNum + ", " + riderTime);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -183,7 +189,7 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     // update the ETA value for a rider
     public void updateRiderETA(String riderNum, float riderETA){
-        Log.d("TTSQLiteHelper: UpdateRiderETA: ", riderNum + ", " + riderETA);
+        Log.d("TTSQLiteHelper: updateRiderETA: ", riderNum + ", " + riderETA);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -198,9 +204,26 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // update the ETA value for a rider
+    // update the rider name value for a rider
+    public void updateRiderName(String riderNum, String riderName){
+        Log.d("TTSQLiteHelper: updateRiderName: ", riderNum + ", " + riderName);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_NAME, riderName); //write rider eta
+
+        db.update(TABLE_RIDER, values, where, null);
+        db.close();
+    }
+
+    // update the Avg Lap value for a rider
     public void updateRiderAvgLap(String riderNum, float riderAvg){
-        Log.d("TTSQLiteHelper: UpdateRiderETA: ", riderNum + ", " + riderAvg);
+        Log.d("TTSQLiteHelper: updateRiderETA: ", riderNum + ", " + riderAvg);
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -225,9 +248,26 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
 
-        String where = "COLUMN_RIDER_ID=" + riderNum; // use rider id as key to update call
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
 
         values.put(COLUMN_RIDER_STD_DEV, riderStdDev); //write rider StdDev
+
+        db.update(TABLE_RIDER, values, where, null);
+        db.close();
+    }
+
+    // update the std-dev value for a rider
+    public void updateRiderLapCount(String riderNum, int riderLapCount){
+        Log.d("TTSQLiteHelper: UpdateRiderStdDev: ", riderNum + ", " + riderLapCount);
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+
+        String where = COLUMN_RIDER_ID + "=" + riderNum; // use rider id as key to update call
+
+        values.put(COLUMN_RIDER_LAP_COUNT, riderLapCount); //write rider StdDev
 
         db.update(TABLE_RIDER, values, where, null);
         db.close();
@@ -351,6 +391,15 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     // Get all the data return the appropriate Cursor.
     public Cursor getAllRiderData(){
 
+        Log.d("TTSQLiteHelper", "getAllData SQL: " + QUERY_ALL_RIDERS_DATA);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(QUERY_ALL_RIDERS_DATA, null);
+    }
+
+    // Get all the data return the appropriate Cursor.
+    public Cursor getAllMainScreenRiderData(){
+
         Log.d("TTSQLiteHelper", "getAllData SQL: " + QUERY_ALL_RIDERS);
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -398,9 +447,9 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
     public int getRiderSplitCount(String number) {
         String countQuery = "SELECT  * FROM " + TABLE_LAP
-                + " WHERE " + COLUMN_RIDER_ID + "='" + number + "';";
+                + " WHERE " + COLUMN_LAP_RIDER + "='" + number + "';";
 
-        Log.d("TTSQLiteHelper: getResponseCount", "Query String: " + countQuery);
+        Log.d("TTSQLiteHelper: getRiderSplitCount", "Query String: " + countQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
@@ -408,6 +457,8 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
         cursor.close();
         db.close();
+
+        Log.d("TTSQLiteHelper: getRiderSplitCount", "Count: " + count);
 
         // return count
         return count;

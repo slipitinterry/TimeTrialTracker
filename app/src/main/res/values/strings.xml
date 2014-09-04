@@ -5,9 +5,13 @@
     <string name="action_clear">Clear Data</string>
     <string name="list_header_rider">Rider</string>
     <string name="list_header_time">Time</string>
-    <string name="action_add_rider">Add Rider</string>
+    <string name="action_add_rider">Manage Riders</string>
     <string name="action_rider_stats">Rider Stats</string>
     <string name="action_lap_stats">Lap Stats</string>
+    <string name="action_delete_rider">Remove Rider</string>
+    <string name="action_edit_rider">Edit Rider</string>
+    <string name="action_clear_riders">Delete All Riders</string>
+    <string name="action_clear_laps">Delete All Laps</string>
     <string name="title_activity_add_rider">Add Rider</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -18,6 +22,7 @@
     <string name="dlg_add">Add</string>
     <string name="dlg_next">Next</string>
     <string name="dlg_yes">Yes</string>
+    <string name="dlg_no">No</string>
     <string name="dlg_cancel">Cancel</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rider_name_hint">Rider Name</string>
@@ -28,5 +33,13 @@
     <string name="std_dev_title">Std-Dev</string>
     <string name="avg_lap_title">Avg Lap</string>
     <string name="title_activity_ttrider_stats">Rider Stats</string>
-
+    <string name="remove">Remove Rider</string>
+    <string name="cancel">Cancel</string>
+    <string name="set_menu_item">"Selected Rider"</string>
+    <string name="cancelremove">Canceled Remove</string>
+    <string name="acknowledgeremove_title">Remove Rider</string>
+    <string name="acknowledgeremove_msg">Are you sure you want to remove this rider?</string>
+    <string name="btn_add_rider">Add Rider</string>
+    <string name="nothing_selected">Nothing Selected!</string>
+    <string name="rider_laps_title">Laps:</string>
 </resources>

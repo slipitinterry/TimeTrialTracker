@@ -14,6 +14,8 @@ import android.widget.TextView;
  */
 public class TTRiderCursorAdapter extends CursorAdapter {
 
+    private int selectedPos = -1;	// init value for not-selected
+
     public TTRiderCursorAdapter(Context context, Cursor c) {
         super(context, c);
     }
@@ -41,5 +43,14 @@ public class TTRiderCursorAdapter extends CursorAdapter {
 
     }
 
+    public int getSelectedPosition(){
+        return selectedPos;
+    }
+
+    public void setSelectedPosition(int pos){
+        selectedPos = pos;
+        // inform the view of this change
+        notifyDataSetChanged();
+    }
 
 }

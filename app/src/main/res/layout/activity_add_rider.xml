@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/action_add_rider"
+            android:text="@string/btn_add_rider"
             android:id="@+id/btnAddRider"
             android:onClick="onAddRider"/>
 
@@ -29,6 +29,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="8" >
+
+            <EditText
+                android:id="@+id/editTextRider"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_add_rider"
+                android:hint="@string/action_add_rider"
+                android:visibility="gone"
+                />
 
             <ListView
                 android:layout_width="match_parent"

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ridgway.timetrialtracker.TTRiderStats" >
     <item android:id="@+id/action_clear"
-        android:title="@string/action_clear"
+        android:title="@string/action_clear_riders"
         android:orderInCategory="100"
         android:showAsAction="never" />
 </menu>

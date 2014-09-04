@@ -47,6 +47,9 @@ public class TTCursorAdapter extends CursorAdapter {
         TextView textViewRiderSplit = (TextView) view.findViewById(R.id.rider_name);
         textViewRiderSplit.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
 
+        TextView textViewRiderLaps = (TextView) view.findViewById(R.id.rider_laps);
+        textViewRiderLaps.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6))));
+
         TextView textViewRiderLast = (TextView) view.findViewById(R.id.rider_last_seen);
         textViewRiderLast.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
 
@@ -88,6 +91,9 @@ public class TTCursorAdapter extends CursorAdapter {
        if(strLast == null || strLast.isEmpty()){ strLast = "0"; }
        TimeString tsRiderLast = Utils.floatToTimeString(Float.parseFloat(strLast));
        textViewRiderLast.setText(tsRiderLast.getCurrentElapsedTime());
+
+       TextView textViewRiderLaps = (TextView) view.findViewById(R.id.rider_laps);
+       textViewRiderLaps.setText(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6))));
 
        TextView textViewRiderETA = (TextView) view.findViewById(R.id.rider_eta);
        String strETA = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3)));
