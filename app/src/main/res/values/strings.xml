@@ -41,5 +41,6 @@
     <string name="acknowledgeremove_msg">Are you sure you want to remove this rider?</string>
     <string name="btn_add_rider">Add Rider</string>
     <string name="nothing_selected">Nothing Selected!</string>
-    <string name="rider_laps_title">Laps:</string>
+    <string name="rider_laps_title">Laps completed:</string>
+
 </resources>

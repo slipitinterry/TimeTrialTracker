@@ -75,6 +75,9 @@ public class TimeTrialActivity extends Activity {
         resetTimer();
         hideStopButton();
 
+        // Blank the last seen rider fields.
+        setLastRiderFields("", "", 0f);
+
         // Get a handle to our database, so we can store/retrieve
         // recent responses.
         db = new TTSQLiteHelper(this);
@@ -196,21 +199,10 @@ public class TimeTrialActivity extends Activity {
         resetTimer();
     }
 
-
-    public void onStartRider (View view){
+    private void setLastRiderFields( String riderNum, String riderName, float riderTime){
         TextView txtRiderNum = (TextView)findViewById(R.id.rider_number);
         TextView txtRiderName = (TextView)findViewById(R.id.txtRider);
         TextView txtRiderTime = (TextView)findViewById(R.id.txtRiderTime);
-
-        // Get the selected rider info
-        int selectedPos = ttAdapter.getSelectedPosition();
-
-        Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
-
-
-        String riderNum = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(0)));
-        String riderName = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1)));
-        float riderTime = elapsedTime;
 
         // convert the elapsed milliseconds time into a string we can
         // set into the textview.
@@ -222,6 +214,19 @@ public class TimeTrialActivity extends Activity {
         txtRiderName.setText(riderName);
         txtRiderTime.setText(strRiderTime);
 
+    }
+
+    public void onStartRider (View view){
+
+        // Get the selected rider info
+        int selectedPos = ttAdapter.getSelectedPosition();
+        Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
+
+        String riderNum = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(0)));
+        String riderName = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1)));
+        float riderTime = elapsedTime;
+
+        setLastRiderFields(riderNum, riderName, riderTime);
 
         // write the rider info to the splits table
         db.addRiderSplit(riderNum, riderTime);
@@ -230,6 +235,7 @@ public class TimeTrialActivity extends Activity {
 
         // set the selected position back to the top
         ttAdapter.setSelectedPosition(0);
+        listView.setSelection(0);
 
         // In a background tasks, Run through all the laps for this rider
         // and update the avg lap and std-dev values in the table

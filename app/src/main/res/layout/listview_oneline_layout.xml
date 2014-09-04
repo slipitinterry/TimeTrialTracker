@@ -35,7 +35,7 @@
         <TextView android:id="@+id/rider_laps_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="@string/rider_laps_title"
             android:textStyle="bold"
             android:textSize="10sp"
@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="laps#"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
@@ -68,6 +69,7 @@
             android:textSize="15sp"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textStyle="bold" />
 
         <TextView android:id="@+id/rider_last_seen"
@@ -75,9 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="last seen"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:paddingBottom="5dp"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
 
         <TextView android:id="@+id/rider_eta_title"
             android:layout_width="0dp"
@@ -86,7 +89,8 @@
             android:text="ETA:"
             android:textSize="15sp"
             android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textStyle="bold" />
 
         <TextView android:id="@+id/rider_eta"
@@ -94,9 +98,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="rider eta"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:paddingBottom="5dp"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
     </LinearLayout>
 
 

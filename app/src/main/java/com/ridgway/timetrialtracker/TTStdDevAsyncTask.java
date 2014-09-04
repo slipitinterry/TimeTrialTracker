@@ -32,7 +32,7 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
             // table for this rider, so let's start by gathering all
             // of the laps.
             Log.d("TTStdDevAsyncTask: doInBackground", "We have multiple Laps");
-            db.updateRiderLapCount(riderNum, count - 1);
+            db.updateRiderLapCount(riderNum, (count - 1));
 
 
             // Once we have all the laps, create an array of lap times
@@ -41,10 +41,10 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
             Log.d("TTStdDevAsyncTask: doInBackground", "Got Lap splits");
             List<Float> rider_lap_times = db.getAllRiderLaps(riderNum);
             List<Float> rider_splits = new LinkedList<Float>();
-            ListIterator<Float> iter = rider_lap_times.listIterator();
-            Float start = iter.next();
-            while(iter.hasNext()){
-                Float next = iter.next();
+            ListIterator<Float> iterLaps = rider_lap_times.listIterator();
+            Float start = iterLaps.next();
+            while(iterLaps.hasNext()){
+                Float next = iterLaps.next();
                 rider_splits.add(next - start);
                 start = next;
             }
