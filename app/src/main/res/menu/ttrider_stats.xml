@@ -5,4 +5,8 @@
         android:title="@string/action_clear_riders"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/action_clear_everything"
+        android:title="@string/action_clear_everything"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>

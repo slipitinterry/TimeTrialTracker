@@ -15,10 +15,12 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
 
     private TTSQLiteHelper db; // Database link for storing lap information
     private final Context mContext;
+    private final TimeTrialActivity mActivity;
 
-    public TTStdDevAsyncTask(Context context){
+    public TTStdDevAsyncTask(TimeTrialActivity ttActivity, Context context){
         super();
         mContext = context;
+        mActivity = ttActivity;
     }
 
     protected Long doInBackground(String... rider_id) {
@@ -89,10 +91,10 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
 
             ListIterator<Float> iterAvgStdDev = rider_splits.listIterator();
             int stdDevCount = 1;
-            float diff = fAvg - iterAvgStdDev.next();
+            float diff = java.lang.Math.abs(fAvg - iterAvgStdDev.next());
             rider_std_dev.add(diff);
             while(iterAvgStdDev.hasNext()){
-                diff = fAvg - iterAvgStdDev.next();
+                diff = java.lang.Math.abs(fAvg - iterAvgStdDev.next());
                 rider_std_dev.add(diff);
                 stdDevCount++;
             }
@@ -104,7 +106,7 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
                 fStdDev = fStdDev + next;
             }
 
-            fStdDev = fStdDev / (float)stdDevCount;
+            fStdDev = fStdDev / (float)stdDevCount / 1000f;
 
             db.updateRiderStdDev(riderNum, fStdDev);
 
@@ -119,8 +121,8 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
 
     protected void onPostExecute(Long result) {
         Log.d("TTStdDevAsyncTask: onPostExecute", "DONE!");
-        if(mContext instanceof TimeTrialActivity){
-            ((TimeTrialActivity)mContext).updateDataChanged();
+        if(mActivity instanceof TimeTrialActivity){
+            mActivity.updateDataChanged();
         }
         else{
             Log.d("TTStdDevAsyncTask: onPostExecute", "WRONG CONTEXT! Can't update ListView!");

@@ -59,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Stop"
-                android:id="@+id/btnStop"
-                android:onClick="onStop"/>
+                android:id="@+id/btnStop"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

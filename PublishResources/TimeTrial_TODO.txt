@@ -3,11 +3,7 @@
 Feature Fixes needed for v1.0
 =============================
 
---- Blank out Last Seen Rider Info on startup
 --- Start Rider / Checkin button text needs correct selection update
---- Laps number not working -- change text to Laps Completed
---- ETA not quite working right. Evaluate
---- Std Deviation showing a negative value, should be positive
 
 -- Include Ads on Main Screen
 
@@ -47,3 +43,14 @@ Once hacked, a time record is written, lap is incremented, the rider gets a new 
 It would be cool if the displayed ETA would count down.
 
 What I haven't figured out yet is how to keep visible, the next rider to start, when riders begin lapping before all have started. A loop is needed to ensure the next rider to start is always shown at the top of the screen list.
+
+
+
+FIXED
+=======
+
+--- Laps number not working -- change text to Laps Completed
+--- ETA not quite working right. Evaluate
+--- Std Deviation showing a negative value, should be positive
+--- Blank out Last Seen Rider Info on startup
+

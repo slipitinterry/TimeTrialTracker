@@ -1,11 +1,13 @@
 package com.ridgway.timetrialtracker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,6 +99,21 @@ public class TimeTrialActivity extends Activity {
         });
 
         listView.setOnItemClickListener(mMessageClickedHandler);
+
+        // Setup click listeners so we can have two actions from the enable/disable button
+        Button enableBtn = (Button) findViewById(R.id.btnStop);
+        enableBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                shortClickStopBtn(v);
+            }
+        });
+
+        enableBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                longClickStopBtn(v);
+                return true;
+            }});
+
 /*
         // Create an ad.
         AdView adView = (AdView) this.findViewById(R.id.adView);
@@ -107,7 +124,6 @@ public class TimeTrialActivity extends Activity {
 */
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -186,6 +202,8 @@ public class TimeTrialActivity extends Activity {
 
         // set the selected listview position to the top
         ttAdapter.setSelectedPosition(0);
+        listView.setSelection(0);
+        selectedRiderPosition = 0;
     }
 
     public void onStop(View v){
@@ -197,6 +215,21 @@ public class TimeTrialActivity extends Activity {
     public void onReset (View view){
         bStopped = false;
         resetTimer();
+    }
+
+    private void shortClickStopBtn(View v){
+        // Create toast message
+        Context context = getApplicationContext();
+        CharSequence text = getResources().getString(R.string.longclick_toast);
+        int duration = Toast.LENGTH_SHORT;
+        Toast toastClick = Toast.makeText(context, text, duration);
+        toastClick.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toastClick.show();
+
+    }
+
+    private void longClickStopBtn(View v){
+        onStop(v);
     }
 
     private void setLastRiderFields( String riderNum, String riderName, float riderTime){
@@ -236,10 +269,11 @@ public class TimeTrialActivity extends Activity {
         // set the selected position back to the top
         ttAdapter.setSelectedPosition(0);
         listView.setSelection(0);
+        selectedRiderPosition = 0;
 
         // In a background tasks, Run through all the laps for this rider
         // and update the avg lap and std-dev values in the table
-        new TTStdDevAsyncTask(getApplicationContext()).execute(riderNum);
+        new TTStdDevAsyncTask(this, getApplicationContext()).execute(riderNum);
 
     }
 
@@ -253,11 +287,10 @@ public class TimeTrialActivity extends Activity {
             Button riderBtnStart = (Button)(findViewById(R.id.btnStartRider));
             riderBtnStart.setEnabled(true);
 
-            int selectedPos = ttAdapter.getSelectedPosition();
-            Cursor cursor = (Cursor)ttAdapter.getItem(selectedPos);
+            Cursor cursor = (Cursor)ttAdapter.getItem(selectedRiderPosition);
 
             String riderLast = "0";
-            if(selectedPos >= 0) {
+            if(selectedRiderPosition >= 0) {
                 // If something is selected, check the last seen time so
                 // we can adjust the button text for Start vs. Checkin
                 riderLast = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));

@@ -99,6 +99,18 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
+    // Cleanup everything and start fresh
+    public void wipeDatabases(){
+        Log.d("TTSQLiteHelper: wipeDatabases ", "Cleanup");
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP VIEW IF EXISTS " + VIEW_LAP_STATS + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RIDER + ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LAP + ";");
+        onCreate(db);
+    }
+
+
     // Add a rider split time to the database
     public void addRiderSplit(String rider, float time){
         Log.d("TTSQLiteHelper: addRiderSplit: ", rider + ", " + time);

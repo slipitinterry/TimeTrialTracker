@@ -58,6 +58,10 @@ public class TTRiderStats extends Activity {
             clearRiderData();
             return true;
         }
+        if (id == R.id.action_clear_everything) {
+            clearAllData();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -74,6 +78,31 @@ public class TTRiderStats extends Activity {
                         //do stuff onclick of YES
                         // clear the database
                         db.deleteAllRiders();
+                        // update the listView
+                        ttRiderStatsAdapter.changeCursor(db.getAllRiderData());
+                    }
+                })
+                .setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //do nothing onclick of CANCEL
+                    }
+                }).show();
+
+    }
+
+    /**
+     * Update the database to remove all the rider info
+     * and update the listview to reflect the new data
+     */
+    private void clearAllData(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.acknowledge_delete_everything_title )
+                .setMessage(R.string.acknowledge_delete_everything_msg)
+                .setPositiveButton(R.string.dlg_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //do stuff onclick of YES
+                        // clear the database
+                        db.wipeDatabases();
                         // update the listView
                         ttRiderStatsAdapter.changeCursor(db.getAllRiderData());
                     }

@@ -12,6 +12,7 @@
     <string name="action_edit_rider">Edit Rider</string>
     <string name="action_clear_riders">Delete All Riders</string>
     <string name="action_clear_laps">Delete All Laps</string>
+    <string name="action_clear_everything">Delete Databases</string>
     <string name="title_activity_add_rider">Add Rider</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -19,6 +20,8 @@
     <string name="acknowledge_delete_riders_msg">Are you sure you want to clear all the riders\' data?</string>
     <string name="acknowledge_delete_laps_title">Clear Laps</string>
     <string name="acknowledge_delete_laps_msg">Are you sure you want to clear all the lap data?</string>
+    <string name="acknowledge_delete_everything_title">Clear All Data</string>
+    <string name="acknowledge_delete_everything_msg">Are you sure you want to clear all the time trial data?</string>
     <string name="dlg_add">Add</string>
     <string name="dlg_next">Next</string>
     <string name="dlg_yes">Yes</string>
@@ -41,6 +44,8 @@
     <string name="acknowledgeremove_msg">Are you sure you want to remove this rider?</string>
     <string name="btn_add_rider">Add Rider</string>
     <string name="nothing_selected">Nothing Selected!</string>
-    <string name="rider_laps_title">Laps completed:</string>
+    <string name="rider_laps_title">Laps:</string>
+    <string name="last_seen_title">Last Seen:</string>
+    <string name="longclick_toast">Hold Stop button to Stop Timer</string>
 
 </resources>

@@ -9,38 +9,36 @@
         android:id="@+id/rider_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="true">
 
-    <TextView android:id="@+id/rider_number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="rider#"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"/>
+        <TextView android:id="@+id/rider_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rider#"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
 
-    <TextView android:id="@+id/rider_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:text="rider name"
-        android:textSize="20sp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"/>
+        <TextView android:id="@+id/rider_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rider name"
+            android:textSize="20sp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"/>
 
         <TextView android:id="@+id/rider_laps_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:text="@string/rider_laps_title"
             android:textStyle="bold"
             android:textSize="10sp"
             android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
+            android:paddingLeft="20dp"
             android:paddingRight="5dp"/>
 
         <TextView android:id="@+id/rider_laps"
@@ -59,23 +57,22 @@
         android:id="@+id/rider_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="true">
 
         <TextView android:id="@+id/rider_last_seen_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Last Seen"
-            android:textSize="15sp"
+            android:text="@string/last_seen_title"
+            android:textSize="10sp"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textStyle="bold" />
 
         <TextView android:id="@+id/rider_last_seen"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:text="last seen"
             android:textSize="20sp"
             android:paddingBottom="5dp"
@@ -83,20 +80,18 @@
             android:paddingRight="5dp" />
 
         <TextView android:id="@+id/rider_eta_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="ETA:"
-            android:textSize="15sp"
+            android:textSize="10sp"
             android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
+            android:paddingLeft="25dp"
             android:paddingRight="5dp"
             android:textStyle="bold" />
 
         <TextView android:id="@+id/rider_eta"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:text="rider eta"
             android:textSize="20sp"
             android:paddingBottom="5dp"
