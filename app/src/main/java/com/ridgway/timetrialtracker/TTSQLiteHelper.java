@@ -487,16 +487,16 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         if (lapCursor != null) {
             csvString = csvHeader;
             while (lapCursor.moveToNext()) {
-                csvValues = lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(0))) + ",";
+                csvValues = "\"" + lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(0))) + "\",";
 
-                csvValues += lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(1))) + ",";
+                csvValues += "\"" + lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(1))) + "\",";
 
                 String strSplit = lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(2)));
                 if (strSplit == null || strSplit.isEmpty()) {
                     strSplit = "0";
                 }
                 TimeString tsRiderSplit = Utils.floatToTimeString(Float.parseFloat(strSplit));
-                csvValues += tsRiderSplit.getCurrentElapsedTime();
+                csvValues += "\"" + tsRiderSplit.getCurrentElapsedTime() + "\"";
 
                 csvString += "\n" + csvValues;
             }
@@ -515,18 +515,18 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
         if (riderCursor != null) {
             csvString = csvHeader;
             while (riderCursor.moveToNext()) {
-                csvValues = riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(0))) + ",";
+                csvValues = "\"" + riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(0))) + "\",";
 
-                csvValues += riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(1))) + ",";
+                csvValues += "\"" + riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(1))) + "\",";
 
                 String strSplit = riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(4)));
                 if (strSplit == null || strSplit.isEmpty()) {
                     strSplit = "0";
                 }
                 TimeString tsRiderSplit = Utils.floatToTimeString(Float.parseFloat(strSplit));
-                csvValues += tsRiderSplit.getCurrentElapsedTime();
+                csvValues += "\"" + tsRiderSplit.getCurrentElapsedTime() + "\",";
 
-                csvValues += riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(5)));
+                csvValues += "\"" + riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(5))) + "\"";
 
                 csvString += "\n" + csvValues;
             }
