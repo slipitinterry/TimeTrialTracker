@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.sql.Date;
 import java.util.LinkedList;
@@ -474,5 +475,63 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
 
         // return count
         return count;
+    }
+
+    public String getAllLapsAsCSVString() {
+        String csvHeader = "\"RiderNumber\", \"RiderName\", \"LapSplit\"";
+        String csvValues = "";
+        String csvString = "";
+
+        Cursor lapCursor = getAllLapDataAndRiderName();
+
+        if (lapCursor != null) {
+            csvString = csvHeader;
+            while (lapCursor.moveToNext()) {
+                csvValues = lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(0))) + ",";
+
+                csvValues += lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(1))) + ",";
+
+                String strSplit = lapCursor.getString(lapCursor.getColumnIndex(lapCursor.getColumnName(2)));
+                if (strSplit == null || strSplit.isEmpty()) {
+                    strSplit = "0";
+                }
+                TimeString tsRiderSplit = Utils.floatToTimeString(Float.parseFloat(strSplit));
+                csvValues += tsRiderSplit.getCurrentElapsedTime();
+
+                csvString += "\n" + csvValues;
+            }
+        }
+
+        return csvString;
+    }
+
+    public String getAllRidersAsCSVString() {
+        String csvHeader = "\"RiderNumber\", \"RiderName\", \"AvgLap\", \"Std-Dev\"";
+        String csvValues = "";
+        String csvString = "";
+
+        Cursor riderCursor = getAllRiderData();
+
+        if (riderCursor != null) {
+            csvString = csvHeader;
+            while (riderCursor.moveToNext()) {
+                csvValues = riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(0))) + ",";
+
+                csvValues += riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(1))) + ",";
+
+                String strSplit = riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(4)));
+                if (strSplit == null || strSplit.isEmpty()) {
+                    strSplit = "0";
+                }
+                TimeString tsRiderSplit = Utils.floatToTimeString(Float.parseFloat(strSplit));
+                csvValues += tsRiderSplit.getCurrentElapsedTime();
+
+                csvValues += riderCursor.getString(riderCursor.getColumnIndex(riderCursor.getColumnName(5)));
+
+                csvString += "\n" + csvValues;
+            }
+        }
+
+        return csvString;
     }
 }

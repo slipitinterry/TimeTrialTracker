@@ -7,6 +7,9 @@ Feature Fixes needed for v1.0
 
 -- Include Ads on Main Screen
 
+Stop the screen from turning off and once a rider has met the configured lap total remove them from the list
+
+Maybe -- Screen with laps listed in descending order by lap id.  Allow user to change rider id for the lap.  Update stddev and eta for both riders involved.
 
 
 
@@ -43,7 +46,6 @@ Once hacked, a time record is written, lap is incremented, the rider gets a new 
 It would be cool if the displayed ETA would count down.
 
 What I haven't figured out yet is how to keep visible, the next rider to start, when riders begin lapping before all have started. A loop is needed to ensure the next rider to start is always shown at the top of the screen list.
-
 
 
 FIXED

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -204,12 +205,20 @@ public class TimeTrialActivity extends Activity {
         ttAdapter.setSelectedPosition(0);
         listView.setSelection(0);
         selectedRiderPosition = 0;
+
+        // make sure we don't let the screen sleep while running a lap track
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     public void onStop(View v){
         hideStopButton();
         bStopped = true;
         mHandler.removeCallbacks(startTimer);
+
+        // let the phone screen go to sleep now we're done.
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     public void onReset (View view){

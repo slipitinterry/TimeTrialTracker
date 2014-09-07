@@ -1,8 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ridgway.timetrialtracker.TTLapSplitsActivity" >
+    <item
+        android:id="@+id/menu_item_share"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_share"
+        android:actionProviderClass=
+            "android.widget.ShareActionProvider" />
     <item android:id="@+id/action_clear"
         android:title="@string/action_clear_laps"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_clear_everything"
+        android:title="@string/action_clear_everything"
         android:orderInCategory="100"
         android:showAsAction="never" />
 </menu>

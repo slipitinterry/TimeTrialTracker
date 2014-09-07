@@ -13,6 +13,7 @@
     <string name="action_clear_riders">Delete All Riders</string>
     <string name="action_clear_laps">Delete All Laps</string>
     <string name="action_clear_everything">Delete Databases</string>
+    <string name="action_share">Share</string>
     <string name="title_activity_add_rider">Add Rider</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -47,5 +48,6 @@
     <string name="rider_laps_title">Laps:</string>
     <string name="last_seen_title">Last Seen:</string>
     <string name="longclick_toast">Hold Stop button to Stop Timer</string>
+    <string name="send_to">Share Lap Data...</string>
 
 </resources>

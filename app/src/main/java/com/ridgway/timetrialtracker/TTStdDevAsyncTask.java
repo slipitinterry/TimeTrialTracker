@@ -91,11 +91,11 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
 
             ListIterator<Float> iterAvgStdDev = rider_splits.listIterator();
             int stdDevCount = 1;
-            float diff = java.lang.Math.abs(fAvg - iterAvgStdDev.next());
-            rider_std_dev.add(diff);
+            float diff = (fAvg - iterAvgStdDev.next()) / 1000.0f;
+            rider_std_dev.add(diff * diff);
             while(iterAvgStdDev.hasNext()){
-                diff = java.lang.Math.abs(fAvg - iterAvgStdDev.next());
-                rider_std_dev.add(diff);
+                diff = (fAvg - iterAvgStdDev.next()) / 1000.0f;
+                rider_std_dev.add(diff * diff);
                 stdDevCount++;
             }
 
@@ -106,9 +106,9 @@ public class TTStdDevAsyncTask extends AsyncTask<String, Integer, Long> {
                 fStdDev = fStdDev + next;
             }
 
-            fStdDev = fStdDev / (float)stdDevCount / 1000f;
+            fStdDev = fStdDev / (float)stdDevCount;
 
-            db.updateRiderStdDev(riderNum, fStdDev);
+            db.updateRiderStdDev(riderNum, (float)java.lang.Math.sqrt(fStdDev));
 
 
             // OK, we're done!
