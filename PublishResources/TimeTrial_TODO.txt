@@ -7,11 +7,10 @@ Feature Fixes needed for v1.0
 
 -- Include Ads on Main Screen
 
-Stop the screen from turning off and once a rider has met the configured lap total remove them from the list
 
 Maybe -- Screen with laps listed in descending order by lap id.  Allow user to change rider id for the lap.  Update stddev and eta for both riders involved.
 
-
+Have a configurable number of laps. Once a rider has completed that number, they will drop off the main screen list of riders to be chosen for timing.
 
 
 Feature Requests
@@ -26,16 +25,23 @@ recall (can look at recording sheets for erasures) if we have ever changed the
 rider number AFTER recording.  But some kind of ability to either change the
 number OR just record the error occurred with the correct number is necessary.
 
-2)  Desirable: While I can enter the times into the spread sheet from the phone
-screen, is it possible to create a file (CSV or tab delimited: "Number, time" is
-sufficient)?
 
-3)  Desirable: Is it possible to display the lap (number of previous entries for
-a number)?  I realize that right now the code is just recording the number and
-time and this addition may take a lot more code.  This is something we can't
-(easily) do now and is in the "it would be nice" category.
+
+
+
+FIXED
+=======
+
+--- Laps number not working -- change text to Laps Completed
+--- ETA not quite working right. Evaluate
+--- Std Deviation showing a negative value, should be positive
+--- Blank out Last Seen Rider Info on startup
+Stop the screen from turning off and once a rider has met the configured lap total remove them from the list
+
+
 
 From Scott Francks:
+-------------------
 
 The screen I envision displays at least 5 rows showing number, lap and estimated time of arrival.
 Each of the numbers (or entire row) is a hot spot for hacking
@@ -47,12 +53,15 @@ It would be cool if the displayed ETA would count down.
 
 What I haven't figured out yet is how to keep visible, the next rider to start, when riders begin lapping before all have started. A loop is needed to ensure the next rider to start is always shown at the top of the screen list.
 
+From Harry L:
+-------------
 
-FIXED
-=======
+***** DONE!!! 2)  Desirable: While I can enter the times into the spread sheet from the phone
+screen, is it possible to create a file (CSV or tab delimited: "Number, time" is
+sufficient)?
 
---- Laps number not working -- change text to Laps Completed
---- ETA not quite working right. Evaluate
---- Std Deviation showing a negative value, should be positive
---- Blank out Last Seen Rider Info on startup
+3)  Desirable: Is it possible to display the lap (number of previous entries for
+a number)?  I realize that right now the code is just recording the number and
+time and this addition may take a lot more code.  This is something we can't
+(easily) do now and is in the "it would be nice" category.
 
