@@ -411,12 +411,16 @@ public class TTSQLiteHelper extends SQLiteOpenHelper {
     }
 
     // Get all the data return the appropriate Cursor.
-    public Cursor getAllMainScreenRiderData(){
+    public Cursor getAllMainScreenRiderData(int max_laps){
 
-        Log.d("TTSQLiteHelper", "getAllData SQL: " + QUERY_ALL_RIDERS);
+        String QUERY_ALL_RIDERS_MAIN = "SELECT * FROM " + TABLE_RIDER
+                + " WHERE " + COLUMN_RIDER_LAP_COUNT + "<" + max_laps
+                + " ORDER BY " + COLUMN_RIDER_ETA + ", " + COLUMN_RIDER_LAST_SEEN + ", " + COLUMN_RIDER_ID + ";";
+
+        Log.d("TTSQLiteHelper", "getAllMainScreenRiderData SQL: " + QUERY_ALL_RIDERS_MAIN);
 
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(QUERY_ALL_RIDERS, null);
+        return db.rawQuery(QUERY_ALL_RIDERS_MAIN, null);
     }
 
     // Delete a stored response by database id value.

@@ -49,5 +49,17 @@
     <string name="last_seen_title">Last Seen:</string>
     <string name="longclick_toast">Hold Stop button to Stop Timer</string>
     <string name="send_to">Share Lap Data...</string>
-
+    <string name="action_preferences">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="SettingsPanel_Title">Settings</string>
+    <string name="SettingsPanel_Summary">Application Settings</string>
+    <string name="saved_max_laps">max_laps</string>
+    <string name="saved_app_options">options</string>
+    <string name="app_options_title">Options</string>
+    <string name="saved_prevent_screen_sleep">no_screen_sleep</string>
+    <string name="ScreenSleepCheck_Summary">Don\'t allow the device screen to sleep while tracking the time trial</string>
+    <string name="ScreenSleepCheck_Title">Prevent Screen Sleep</string>
+    <string name="max_laps_title">Max Laps</string>
+    <string name="num_laps_title">Numer of laps</string>
+    <string name="max_laps_summary">Maximum number of laps for the current time trial. Riders will drop from main screen when they\'ve ridden this number of laps.</string>
 </resources>
