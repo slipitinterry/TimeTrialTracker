@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		78595E0019CBD7BC00AB835A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595DFF19CBD7BC00AB835A /* Foundation.framework */; };
+		78595E0219CBD7BC00AB835A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0119CBD7BC00AB835A /* CoreGraphics.framework */; };
+		78595E0419CBD7BC00AB835A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0319CBD7BC00AB835A /* UIKit.framework */; };
+		78595E0A19CBD7BC00AB835A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78595E0819CBD7BC00AB835A /* InfoPlist.strings */; };
+		78595E0C19CBD7BC00AB835A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E0B19CBD7BC00AB835A /* main.m */; };
+		78595E1019CBD7BC00AB835A /* ACTCTTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */; };
+		78595E1319CBD7BC00AB835A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78595E1119CBD7BC00AB835A /* Main.storyboard */; };
+		78595E1619CBD7BC00AB835A /* ACTCTTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E1519CBD7BC00AB835A /* ACTCTTViewController.m */; };
+		78595E1819CBD7BC00AB835A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78595E1719CBD7BC00AB835A /* Images.xcassets */; };
+		78595E1F19CBD7BC00AB835A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E1E19CBD7BC00AB835A /* XCTest.framework */; };
+		78595E2019CBD7BC00AB835A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595DFF19CBD7BC00AB835A /* Foundation.framework */; };
+		78595E2119CBD7BC00AB835A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0319CBD7BC00AB835A /* UIKit.framework */; };
+		78595E2919CBD7BC00AB835A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78595E2719CBD7BC00AB835A /* InfoPlist.strings */; };
+		78595E2B19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		78595E2219CBD7BC00AB835A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78595DF419CBD7BC00AB835A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78595DFB19CBD7BC00AB835A;
+			remoteInfo = ACTCTimeTrialTracker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		78595DFC19CBD7BC00AB835A /* ACTCTimeTrialTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTCTimeTrialTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78595DFF19CBD7BC00AB835A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		78595E0119CBD7BC00AB835A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		78595E0319CBD7BC00AB835A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		78595E0719CBD7BC00AB835A /* ACTCTimeTrialTracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACTCTimeTrialTracker-Info.plist"; sourceTree = "<group>"; };
+		78595E0919CBD7BC00AB835A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78595E0B19CBD7BC00AB835A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		78595E0D19CBD7BC00AB835A /* ACTCTimeTrialTracker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACTCTimeTrialTracker-Prefix.pch"; sourceTree = "<group>"; };
+		78595E0E19CBD7BC00AB835A /* ACTCTTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACTCTTAppDelegate.h; sourceTree = "<group>"; };
+		78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTCTTAppDelegate.m; sourceTree = "<group>"; };
+		78595E1219CBD7BC00AB835A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		78595E1419CBD7BC00AB835A /* ACTCTTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACTCTTViewController.h; sourceTree = "<group>"; };
+		78595E1519CBD7BC00AB835A /* ACTCTTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTCTTViewController.m; sourceTree = "<group>"; };
+		78595E1719CBD7BC00AB835A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		78595E1D19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACTCTimeTrialTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		78595E1E19CBD7BC00AB835A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		78595E2619CBD7BC00AB835A /* ACTCTimeTrialTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACTCTimeTrialTrackerTests-Info.plist"; sourceTree = "<group>"; };
+		78595E2819CBD7BC00AB835A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTCTimeTrialTrackerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78595DF919CBD7BC00AB835A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E0219CBD7BC00AB835A /* CoreGraphics.framework in Frameworks */,
+				78595E0419CBD7BC00AB835A /* UIKit.framework in Frameworks */,
+				78595E0019CBD7BC00AB835A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78595E1A19CBD7BC00AB835A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E1F19CBD7BC00AB835A /* XCTest.framework in Frameworks */,
+				78595E2119CBD7BC00AB835A /* UIKit.framework in Frameworks */,
+				78595E2019CBD7BC00AB835A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		78595DF319CBD7BC00AB835A = {
+			isa = PBXGroup;
+			children = (
+				78595E0519CBD7BC00AB835A /* ACTCTimeTrialTracker */,
+				78595E2419CBD7BC00AB835A /* ACTCTimeTrialTrackerTests */,
+				78595DFE19CBD7BC00AB835A /* Frameworks */,
+				78595DFD19CBD7BC00AB835A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		78595DFD19CBD7BC00AB835A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78595DFC19CBD7BC00AB835A /* ACTCTimeTrialTracker.app */,
+				78595E1D19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78595DFE19CBD7BC00AB835A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78595DFF19CBD7BC00AB835A /* Foundation.framework */,
+				78595E0119CBD7BC00AB835A /* CoreGraphics.framework */,
+				78595E0319CBD7BC00AB835A /* UIKit.framework */,
+				78595E1E19CBD7BC00AB835A /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78595E0519CBD7BC00AB835A /* ACTCTimeTrialTracker */ = {
+			isa = PBXGroup;
+			children = (
+				78595E0E19CBD7BC00AB835A /* ACTCTTAppDelegate.h */,
+				78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */,
+				78595E1119CBD7BC00AB835A /* Main.storyboard */,
+				78595E1419CBD7BC00AB835A /* ACTCTTViewController.h */,
+				78595E1519CBD7BC00AB835A /* ACTCTTViewController.m */,
+				78595E1719CBD7BC00AB835A /* Images.xcassets */,
+				78595E0619CBD7BC00AB835A /* Supporting Files */,
+			);
+			path = ACTCTimeTrialTracker;
+			sourceTree = "<group>";
+		};
+		78595E0619CBD7BC00AB835A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				78595E0719CBD7BC00AB835A /* ACTCTimeTrialTracker-Info.plist */,
+				78595E0819CBD7BC00AB835A /* InfoPlist.strings */,
+				78595E0B19CBD7BC00AB835A /* main.m */,
+				78595E0D19CBD7BC00AB835A /* ACTCTimeTrialTracker-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		78595E2419CBD7BC00AB835A /* ACTCTimeTrialTrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */,
+				78595E2519CBD7BC00AB835A /* Supporting Files */,
+			);
+			path = ACTCTimeTrialTrackerTests;
+			sourceTree = "<group>";
+		};
+		78595E2519CBD7BC00AB835A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				78595E2619CBD7BC00AB835A /* ACTCTimeTrialTrackerTests-Info.plist */,
+				78595E2719CBD7BC00AB835A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78595DFB19CBD7BC00AB835A /* ACTCTimeTrialTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78595E2E19CBD7BC00AB835A /* Build configuration list for PBXNativeTarget "ACTCTimeTrialTracker" */;
+			buildPhases = (
+				78595DF819CBD7BC00AB835A /* Sources */,
+				78595DF919CBD7BC00AB835A /* Frameworks */,
+				78595DFA19CBD7BC00AB835A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ACTCTimeTrialTracker;
+			productName = ACTCTimeTrialTracker;
+			productReference = 78595DFC19CBD7BC00AB835A /* ACTCTimeTrialTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		78595E1C19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78595E3119CBD7BC00AB835A /* Build configuration list for PBXNativeTarget "ACTCTimeTrialTrackerTests" */;
+			buildPhases = (
+				78595E1919CBD7BC00AB835A /* Sources */,
+				78595E1A19CBD7BC00AB835A /* Frameworks */,
+				78595E1B19CBD7BC00AB835A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78595E2319CBD7BC00AB835A /* PBXTargetDependency */,
+			);
+			name = ACTCTimeTrialTrackerTests;
+			productName = ACTCTimeTrialTrackerTests;
+			productReference = 78595E1D19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		78595DF419CBD7BC00AB835A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ACTCTT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Ridgway Coders";
+				TargetAttributes = {
+					78595E1C19CBD7BC00AB835A = {
+						TestTargetID = 78595DFB19CBD7BC00AB835A;
+					};
+				};
+			};
+			buildConfigurationList = 78595DF719CBD7BC00AB835A /* Build configuration list for PBXProject "ACTCTimeTrialTracker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 78595DF319CBD7BC00AB835A;
+			productRefGroup = 78595DFD19CBD7BC00AB835A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78595DFB19CBD7BC00AB835A /* ACTCTimeTrialTracker */,
+				78595E1C19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78595DFA19CBD7BC00AB835A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E1819CBD7BC00AB835A /* Images.xcassets in Resources */,
+				78595E0A19CBD7BC00AB835A /* InfoPlist.strings in Resources */,
+				78595E1319CBD7BC00AB835A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78595E1B19CBD7BC00AB835A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E2919CBD7BC00AB835A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		78595DF819CBD7BC00AB835A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E1619CBD7BC00AB835A /* ACTCTTViewController.m in Sources */,
+				78595E0C19CBD7BC00AB835A /* main.m in Sources */,
+				78595E1019CBD7BC00AB835A /* ACTCTTAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78595E1919CBD7BC00AB835A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78595E2B19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		78595E2319CBD7BC00AB835A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78595DFB19CBD7BC00AB835A /* ACTCTimeTrialTracker */;
+			targetProxy = 78595E2219CBD7BC00AB835A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		78595E0819CBD7BC00AB835A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78595E0919CBD7BC00AB835A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		78595E1119CBD7BC00AB835A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78595E1219CBD7BC00AB835A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		78595E2719CBD7BC00AB835A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78595E2819CBD7BC00AB835A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		78595E2C19CBD7BC00AB835A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		78595E2D19CBD7BC00AB835A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		78595E2F19CBD7BC00AB835A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
+				INFOPLIST_FILE = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		78595E3019CBD7BC00AB835A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
+				INFOPLIST_FILE = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		78595E3219CBD7BC00AB835A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACTCTimeTrialTracker.app/ACTCTimeTrialTracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ACTCTimeTrialTrackerTests/ACTCTimeTrialTrackerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		78595E3319CBD7BC00AB835A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACTCTimeTrialTracker.app/ACTCTimeTrialTracker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
+				INFOPLIST_FILE = "ACTCTimeTrialTrackerTests/ACTCTimeTrialTrackerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78595DF719CBD7BC00AB835A /* Build configuration list for PBXProject "ACTCTimeTrialTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78595E2C19CBD7BC00AB835A /* Debug */,
+				78595E2D19CBD7BC00AB835A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78595E2E19CBD7BC00AB835A /* Build configuration list for PBXNativeTarget "ACTCTimeTrialTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78595E2F19CBD7BC00AB835A /* Debug */,
+				78595E3019CBD7BC00AB835A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		78595E3119CBD7BC00AB835A /* Build configuration list for PBXNativeTarget "ACTCTimeTrialTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78595E3219CBD7BC00AB835A /* Debug */,
+				78595E3319CBD7BC00AB835A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 78595DF419CBD7BC00AB835A /* Project object */;
+}

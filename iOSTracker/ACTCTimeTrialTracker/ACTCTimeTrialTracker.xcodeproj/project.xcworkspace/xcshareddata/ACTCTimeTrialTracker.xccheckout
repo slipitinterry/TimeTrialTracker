@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CABFFC09-7C5B-444E-9C2D-75C6DD4DFC2D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ACTCTimeTrialTracker</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0793A58F-539D-4DF3-9692-02537E5F63DA</key>
+		<string>https://github.com/slipitinterry/TimeTrialTracker.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOSTracker/ACTCTimeTrialTracker/ACTCTimeTrialTracker.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0793A58F-539D-4DF3-9692-02537E5F63DA</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/slipitinterry/TimeTrialTracker.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0793A58F-539D-4DF3-9692-02537E5F63DA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0793A58F-539D-4DF3-9692-02537E5F63DA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TimeTrialTracker</string>
+		</dict>
+	</array>
+</dict>
+</plist>
