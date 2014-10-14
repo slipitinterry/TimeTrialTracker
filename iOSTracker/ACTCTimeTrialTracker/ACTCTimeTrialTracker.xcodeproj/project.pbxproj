@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		782A971719EB4B0500D55044 /* ACTCTTTimeTrialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 782A971619EB4B0500D55044 /* ACTCTTTimeTrialViewController.m */; };
+		782A971A19EB544000D55044 /* ACTCTTTimerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 782A971919EB544000D55044 /* ACTCTTTimerUtils.m */; };
 		78595E0019CBD7BC00AB835A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595DFF19CBD7BC00AB835A /* Foundation.framework */; };
 		78595E0219CBD7BC00AB835A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0119CBD7BC00AB835A /* CoreGraphics.framework */; };
 		78595E0419CBD7BC00AB835A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0319CBD7BC00AB835A /* UIKit.framework */; };
@@ -21,6 +23,10 @@
 		78595E2119CBD7BC00AB835A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0319CBD7BC00AB835A /* UIKit.framework */; };
 		78595E2919CBD7BC00AB835A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78595E2719CBD7BC00AB835A /* InfoPlist.strings */; };
 		78595E2B19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */; };
+		785C66A719EC58FC00666F14 /* timetrial.db in Resources */ = {isa = PBXBuildFile; fileRef = 785C66A619EC58FC00666F14 /* timetrial.db */; };
+		78EBB78319E5B5F000941ED2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */; };
+		78EBB78619E5B63D00941ED2 /* ACTCTTDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */; };
+		78EBB78B19E5C55900941ED2 /* ACTCTTEditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78A19E5C55900941ED2 /* ACTCTTEditInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		782A971519EB4B0500D55044 /* ACTCTTTimeTrialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTTimeTrialViewController.h; sourceTree = "<group>"; };
+		782A971619EB4B0500D55044 /* ACTCTTTimeTrialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTTimeTrialViewController.m; sourceTree = "<group>"; };
+		782A971819EB544000D55044 /* ACTCTTTimerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTTimerUtils.h; sourceTree = "<group>"; };
+		782A971919EB544000D55044 /* ACTCTTTimerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTTimerUtils.m; sourceTree = "<group>"; };
 		78595DFC19CBD7BC00AB835A /* ACTCTimeTrialTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTCTimeTrialTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78595DFF19CBD7BC00AB835A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		78595E0119CBD7BC00AB835A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +63,12 @@
 		78595E2619CBD7BC00AB835A /* ACTCTimeTrialTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACTCTimeTrialTrackerTests-Info.plist"; sourceTree = "<group>"; };
 		78595E2819CBD7BC00AB835A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTCTimeTrialTrackerTests.m; sourceTree = "<group>"; };
+		785C66A619EC58FC00666F14 /* timetrial.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = timetrial.db; sourceTree = "<group>"; };
+		78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		78EBB78419E5B63D00941ED2 /* ACTCTTDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTDBManager.h; sourceTree = "<group>"; };
+		78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTDBManager.m; sourceTree = "<group>"; };
+		78EBB78919E5C55900941ED2 /* ACTCTTEditInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTEditInfoViewController.h; sourceTree = "<group>"; };
+		78EBB78A19E5C55900941ED2 /* ACTCTTEditInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTEditInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EBB78319E5B5F000941ED2 /* libsqlite3.dylib in Frameworks */,
 				78595E0219CBD7BC00AB835A /* CoreGraphics.framework in Frameworks */,
 				78595E0419CBD7BC00AB835A /* UIKit.framework in Frameworks */,
 				78595E0019CBD7BC00AB835A /* Foundation.framework in Frameworks */,
@@ -101,6 +118,7 @@
 		78595DFE19CBD7BC00AB835A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */,
 				78595DFF19CBD7BC00AB835A /* Foundation.framework */,
 				78595E0119CBD7BC00AB835A /* CoreGraphics.framework */,
 				78595E0319CBD7BC00AB835A /* UIKit.framework */,
@@ -112,11 +130,14 @@
 		78595E0519CBD7BC00AB835A /* ACTCTimeTrialTracker */ = {
 			isa = PBXGroup;
 			children = (
-				78595E0E19CBD7BC00AB835A /* ACTCTTAppDelegate.h */,
-				78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */,
+				78EBB78C19E61C5C00941ED2 /* Model */,
 				78595E1119CBD7BC00AB835A /* Main.storyboard */,
 				78595E1419CBD7BC00AB835A /* ACTCTTViewController.h */,
 				78595E1519CBD7BC00AB835A /* ACTCTTViewController.m */,
+				78EBB78919E5C55900941ED2 /* ACTCTTEditInfoViewController.h */,
+				78EBB78A19E5C55900941ED2 /* ACTCTTEditInfoViewController.m */,
+				782A971519EB4B0500D55044 /* ACTCTTTimeTrialViewController.h */,
+				782A971619EB4B0500D55044 /* ACTCTTTimeTrialViewController.m */,
 				78595E1719CBD7BC00AB835A /* Images.xcassets */,
 				78595E0619CBD7BC00AB835A /* Supporting Files */,
 			);
@@ -126,6 +147,9 @@
 		78595E0619CBD7BC00AB835A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				785C66A619EC58FC00666F14 /* timetrial.db */,
+				78595E0E19CBD7BC00AB835A /* ACTCTTAppDelegate.h */,
+				78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */,
 				78595E0719CBD7BC00AB835A /* ACTCTimeTrialTracker-Info.plist */,
 				78595E0819CBD7BC00AB835A /* InfoPlist.strings */,
 				78595E0B19CBD7BC00AB835A /* main.m */,
@@ -150,6 +174,17 @@
 				78595E2719CBD7BC00AB835A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		78EBB78C19E61C5C00941ED2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78EBB78419E5B63D00941ED2 /* ACTCTTDBManager.h */,
+				78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */,
+				782A971819EB544000D55044 /* ACTCTTTimerUtils.h */,
+				782A971919EB544000D55044 /* ACTCTTTimerUtils.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +235,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Ridgway Coders";
 				TargetAttributes = {
+					78595DFB19CBD7BC00AB835A = {
+						DevelopmentTeam = 36TX7XQTPA;
+					};
 					78595E1C19CBD7BC00AB835A = {
 						TestTargetID = 78595DFB19CBD7BC00AB835A;
 					};
@@ -232,6 +270,7 @@
 				78595E1819CBD7BC00AB835A /* Images.xcassets in Resources */,
 				78595E0A19CBD7BC00AB835A /* InfoPlist.strings in Resources */,
 				78595E1319CBD7BC00AB835A /* Main.storyboard in Resources */,
+				785C66A719EC58FC00666F14 /* timetrial.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EBB78619E5B63D00941ED2 /* ACTCTTDBManager.m in Sources */,
+				782A971719EB4B0500D55044 /* ACTCTTTimeTrialViewController.m in Sources */,
+				782A971A19EB544000D55044 /* ACTCTTTimerUtils.m in Sources */,
+				78EBB78B19E5C55900941ED2 /* ACTCTTEditInfoViewController.m in Sources */,
 				78595E1619CBD7BC00AB835A /* ACTCTTViewController.m in Sources */,
 				78595E0C19CBD7BC00AB835A /* main.m in Sources */,
 				78595E1019CBD7BC00AB835A /* ACTCTTAppDelegate.m in Sources */,
@@ -377,10 +420,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
 				INFOPLIST_FILE = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -390,10 +436,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Prefix.pch";
 				INFOPLIST_FILE = "ACTCTimeTrialTracker/ACTCTimeTrialTracker-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -457,6 +506,7 @@
 				78595E3019CBD7BC00AB835A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		78595E3119CBD7BC00AB835A /* Build configuration list for PBXNativeTarget "ACTCTimeTrialTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +515,7 @@
 				78595E3319CBD7BC00AB835A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

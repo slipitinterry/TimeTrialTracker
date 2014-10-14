@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ACTCTTEditInfoViewController.h"
 
-@interface ACTCTTViewController : UIViewController
+@interface ACTCTTViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ACTCTTEditInfoViewControllerDelegate>
+
+- (IBAction)addRider:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableRiders;
 
 @end
