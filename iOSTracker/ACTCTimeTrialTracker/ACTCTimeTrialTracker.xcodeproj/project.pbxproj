@@ -23,7 +23,9 @@
 		78595E2119CBD7BC00AB835A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78595E0319CBD7BC00AB835A /* UIKit.framework */; };
 		78595E2919CBD7BC00AB835A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78595E2719CBD7BC00AB835A /* InfoPlist.strings */; };
 		78595E2B19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */; };
-		785C66A719EC58FC00666F14 /* timetrial.db in Resources */ = {isa = PBXBuildFile; fileRef = 785C66A619EC58FC00666F14 /* timetrial.db */; };
+		789ED8E819EDCC4A00DA18A7 /* timetrial.db in Resources */ = {isa = PBXBuildFile; fileRef = 789ED8E719EDCC4A00DA18A7 /* timetrial.db */; };
+		78D4299A19F063A00007972E /* ACTCTTRiderStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4299919F063A00007972E /* ACTCTTRiderStatsViewController.m */; };
+		78D4299D19F063B60007972E /* ACTCTTLapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4299C19F063B60007972E /* ACTCTTLapsViewController.m */; };
 		78EBB78319E5B5F000941ED2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */; };
 		78EBB78619E5B63D00941ED2 /* ACTCTTDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */; };
 		78EBB78B19E5C55900941ED2 /* ACTCTTEditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78A19E5C55900941ED2 /* ACTCTTEditInfoViewController.m */; };
@@ -63,7 +65,11 @@
 		78595E2619CBD7BC00AB835A /* ACTCTimeTrialTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACTCTimeTrialTrackerTests-Info.plist"; sourceTree = "<group>"; };
 		78595E2819CBD7BC00AB835A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		78595E2A19CBD7BC00AB835A /* ACTCTimeTrialTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTCTimeTrialTrackerTests.m; sourceTree = "<group>"; };
-		785C66A619EC58FC00666F14 /* timetrial.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = timetrial.db; sourceTree = "<group>"; };
+		789ED8E719EDCC4A00DA18A7 /* timetrial.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = timetrial.db; sourceTree = "<group>"; };
+		78D4299819F063A00007972E /* ACTCTTRiderStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTRiderStatsViewController.h; sourceTree = "<group>"; };
+		78D4299919F063A00007972E /* ACTCTTRiderStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTRiderStatsViewController.m; sourceTree = "<group>"; };
+		78D4299B19F063B60007972E /* ACTCTTLapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTLapsViewController.h; sourceTree = "<group>"; };
+		78D4299C19F063B60007972E /* ACTCTTLapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTLapsViewController.m; sourceTree = "<group>"; };
 		78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		78EBB78419E5B63D00941ED2 /* ACTCTTDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTDBManager.h; sourceTree = "<group>"; };
 		78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTDBManager.m; sourceTree = "<group>"; };
@@ -132,6 +138,10 @@
 			children = (
 				78EBB78C19E61C5C00941ED2 /* Model */,
 				78595E1119CBD7BC00AB835A /* Main.storyboard */,
+				78D4299B19F063B60007972E /* ACTCTTLapsViewController.h */,
+				78D4299C19F063B60007972E /* ACTCTTLapsViewController.m */,
+				78D4299819F063A00007972E /* ACTCTTRiderStatsViewController.h */,
+				78D4299919F063A00007972E /* ACTCTTRiderStatsViewController.m */,
 				78595E1419CBD7BC00AB835A /* ACTCTTViewController.h */,
 				78595E1519CBD7BC00AB835A /* ACTCTTViewController.m */,
 				78EBB78919E5C55900941ED2 /* ACTCTTEditInfoViewController.h */,
@@ -147,7 +157,7 @@
 		78595E0619CBD7BC00AB835A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				785C66A619EC58FC00666F14 /* timetrial.db */,
+				789ED8E719EDCC4A00DA18A7 /* timetrial.db */,
 				78595E0E19CBD7BC00AB835A /* ACTCTTAppDelegate.h */,
 				78595E0F19CBD7BC00AB835A /* ACTCTTAppDelegate.m */,
 				78595E0719CBD7BC00AB835A /* ACTCTimeTrialTracker-Info.plist */,
@@ -270,7 +280,7 @@
 				78595E1819CBD7BC00AB835A /* Images.xcassets in Resources */,
 				78595E0A19CBD7BC00AB835A /* InfoPlist.strings in Resources */,
 				78595E1319CBD7BC00AB835A /* Main.storyboard in Resources */,
-				785C66A719EC58FC00666F14 /* timetrial.db in Resources */,
+				789ED8E819EDCC4A00DA18A7 /* timetrial.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +303,8 @@
 				782A971719EB4B0500D55044 /* ACTCTTTimeTrialViewController.m in Sources */,
 				782A971A19EB544000D55044 /* ACTCTTTimerUtils.m in Sources */,
 				78EBB78B19E5C55900941ED2 /* ACTCTTEditInfoViewController.m in Sources */,
+				78D4299D19F063B60007972E /* ACTCTTLapsViewController.m in Sources */,
+				78D4299A19F063A00007972E /* ACTCTTRiderStatsViewController.m in Sources */,
 				78595E1619CBD7BC00AB835A /* ACTCTTViewController.m in Sources */,
 				78595E0C19CBD7BC00AB835A /* main.m in Sources */,
 				78595E1019CBD7BC00AB835A /* ACTCTTAppDelegate.m in Sources */,

@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACTCTimeTrialTracker/ACTCTTTimeTrialViewController.m"
-            timestampString = "434937934.695765"
+            timestampString = "435186170.567301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "-userInfo"
             landmarkType = "5">
          </BreakpointContent>

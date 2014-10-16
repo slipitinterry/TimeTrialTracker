@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ACTCTTTimeTrialViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ACTCTTTimeTrialViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,
+                UITabBarControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *riderNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *riderNameLabel;

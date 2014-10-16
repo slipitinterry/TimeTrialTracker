@@ -80,7 +80,7 @@
     // If the recordIDToEdit property has value other than -1, then create an update query. Otherwise create an insert query.
     NSString *query;
     if (self.recordIDToEdit == -1) {
-        query = [NSString stringWithFormat:@"insert into riders values(null, '%@', null, null, null, null, null)", self.riderNameText.text];
+        query = [NSString stringWithFormat:@"insert into riders values(null, '%@', 0, 0, 0, 0, 0, 0)", self.riderNameText.text];
     }
     else{
         query = [NSString stringWithFormat:@"update riders set riderName='%@' where riderID=%d",
