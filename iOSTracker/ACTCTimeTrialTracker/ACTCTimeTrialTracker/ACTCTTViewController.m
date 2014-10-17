@@ -35,9 +35,16 @@
     // Initialize the dbManager property.
     self.dbManager = [[ACTCTTDBManager alloc] initWithDatabaseFilename:@"timetrial.db"];
     
-    [self loadData];
-
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [self loadData];
+    
+}
+
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     // Get the record ID of the selected name and set it to the recordIDToEdit property.

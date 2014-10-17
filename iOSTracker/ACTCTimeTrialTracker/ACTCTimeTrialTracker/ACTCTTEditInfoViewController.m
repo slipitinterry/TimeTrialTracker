@@ -87,6 +87,8 @@
                  self.riderNameText.text, self.recordIDToEdit];
     }
     
+    NSLog(@"Rider Query: %@", query);
+    
     // Execute the query.
     [self.dbManager executeQuery:query];
     

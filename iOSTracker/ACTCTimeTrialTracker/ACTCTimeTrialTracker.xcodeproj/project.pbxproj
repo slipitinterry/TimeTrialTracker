@@ -26,6 +26,7 @@
 		789ED8E819EDCC4A00DA18A7 /* timetrial.db in Resources */ = {isa = PBXBuildFile; fileRef = 789ED8E719EDCC4A00DA18A7 /* timetrial.db */; };
 		78D4299A19F063A00007972E /* ACTCTTRiderStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4299919F063A00007972E /* ACTCTTRiderStatsViewController.m */; };
 		78D4299D19F063B60007972E /* ACTCTTLapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4299C19F063B60007972E /* ACTCTTLapsViewController.m */; };
+		78D4299F19F074670007972E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78D4299E19F074670007972E /* Settings.bundle */; };
 		78EBB78319E5B5F000941ED2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */; };
 		78EBB78619E5B63D00941ED2 /* ACTCTTDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */; };
 		78EBB78B19E5C55900941ED2 /* ACTCTTEditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EBB78A19E5C55900941ED2 /* ACTCTTEditInfoViewController.m */; };
@@ -70,6 +71,7 @@
 		78D4299919F063A00007972E /* ACTCTTRiderStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTRiderStatsViewController.m; sourceTree = "<group>"; };
 		78D4299B19F063B60007972E /* ACTCTTLapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTLapsViewController.h; sourceTree = "<group>"; };
 		78D4299C19F063B60007972E /* ACTCTTLapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTLapsViewController.m; sourceTree = "<group>"; };
+		78D4299E19F074670007972E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		78EBB78219E5B5F000941ED2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		78EBB78419E5B63D00941ED2 /* ACTCTTDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTCTTDBManager.h; sourceTree = "<group>"; };
 		78EBB78519E5B63D00941ED2 /* ACTCTTDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTCTTDBManager.m; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				782A971619EB4B0500D55044 /* ACTCTTTimeTrialViewController.m */,
 				78595E1719CBD7BC00AB835A /* Images.xcassets */,
 				78595E0619CBD7BC00AB835A /* Supporting Files */,
+				78D4299E19F074670007972E /* Settings.bundle */,
 			);
 			path = ACTCTimeTrialTracker;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			files = (
 				78595E1819CBD7BC00AB835A /* Images.xcassets in Resources */,
 				78595E0A19CBD7BC00AB835A /* InfoPlist.strings in Resources */,
+				78D4299F19F074670007972E /* Settings.bundle in Resources */,
 				78595E1319CBD7BC00AB835A /* Main.storyboard in Resources */,
 				789ED8E819EDCC4A00DA18A7 /* timetrial.db in Resources */,
 			);

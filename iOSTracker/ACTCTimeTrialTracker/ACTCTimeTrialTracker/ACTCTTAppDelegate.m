@@ -12,6 +12,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Register the preference defaults early.
+    NSDictionary *appDefaults = [NSDictionary
+                                 dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"disableScreenSleep",
+                                                              [NSNumber numberWithBool:NO], @"hideRidersAfterLastLap",
+                                                              @"5", @"numLaps", nil ];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
     // Override point for customization after application launch.
     return YES;
 }

@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface ACTCTTLapsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,
-                                UITabBarControllerDelegate>
+                                UITabBarControllerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *lapsTableView;
 
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareDataButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteDataButton;
+
+- (IBAction)shareDataAction:(UIBarButtonItem *)sender;
+- (IBAction)deleteDataAction:(UIBarButtonItem *)sender;
+
 
 @end

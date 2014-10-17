@@ -129,4 +129,37 @@
 }
 */
 
+- (IBAction)shareDataAction:(UIBarButtonItem *)sender {
+}
+
+- (IBAction)deleteDataAction:(UIBarButtonItem *)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wait" message:@"Are you sure you want to delete the lap data?  This action cannot be undone" delegate:self cancelButtonTitle:@"Delete" otherButtonTitles:@"Cancel", nil];
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0){
+        //delete it
+        NSLog(@"Deleting All of the Lap Data...");
+        
+        // Setup the delete table query string
+        NSString *dropTable = @"drop table if exists laps";
+        
+        // Execute the drop table
+        [self.dbManager executeQuery:dropTable];
+        
+        NSString *createTable = @"CREATE TABLE laps(lapID integer primary key, riderID integer, lap_split number)";
+        
+        // Execute the create table
+        [self.dbManager executeQuery:createTable];
+        
+        // Reload the table view control
+        [self loadData];
+        
+    }
+}
+
+
 @end

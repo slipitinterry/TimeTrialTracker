@@ -15,6 +15,11 @@
 
 @property BOOL bStopped;
 @property (getter = isRunning) BOOL bRunning;
+
+@property BOOL disableScreenSleep;
+@property BOOL hideRidersAfterLastLap;
+@property int maxLaps;
+
 @property NSTimeInterval elapsedTime;
 @property NSTimeInterval currentInterval;
 
@@ -52,6 +57,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    // Get our user preference values
+    NSUserDefaults *defaultPrefs = [NSUserDefaults standardUserDefaults];
+    self.disableScreenSleep = [defaultPrefs boolForKey:@"disableScreenSleep"];
+    self.hideRidersAfterLastLap = [defaultPrefs boolForKey:@"hideRidersAfterLastLap"];
+    self.maxLaps = [defaultPrefs integerForKey:@"numLaps"];
+
+    
     // Make self the delegate and datasource of the table view.
     self.tableRiderInfo.delegate = self;
     self.tableRiderInfo.dataSource = self;
@@ -76,9 +88,17 @@
 
 -(void)loadData{
     // Form the query.
-    NSString *query = @"select * from riders order by eta, last_seen, riderID";
+    NSString *select = @"select * from riders";
+    
+    NSString *where = @"";
+    if(self.hideRidersAfterLastLap){
+        where = [NSString stringWithFormat:@" where laps < '%d'", self.maxLaps];
+    }
+    
+    NSString *query = [NSString stringWithFormat:@"%@ %@ order by eta, last_seen, riderID", select, where];
     
     NSLog(@"Loading data for TimeTrial List View...");
+    NSLog(@"Using Query: %@", query);
     
     // Get the results.
     if (self.arrRiderInfo != nil) {
@@ -170,9 +190,10 @@
 
     NSInteger indexOfRiderLaps = [self.dbManager.arrColumnNames indexOfObject:@"laps"];
     NSInteger selectedRiderLaps = (NSInteger) [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRiderLaps];
+    
     // If we have already started a rider, they will have a non-zero lap count
     // So, change the button text to Checkin.
-    if(selectedRiderLaps == 0){
+    if(selectedRiderLaps < 1){
         [self.startRiderButton setTitle:@"Start Rider" forState:UIControlStateNormal];
     }
     else {
@@ -182,6 +203,7 @@
     NSInteger indexOfRiderID = [self.dbManager.arrColumnNames indexOfObject:@"riderID"];
     self.selectedRiderID = [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRiderID];
     NSLog (@"Rider selected: %@", self.selectedRiderName);
+    NSLog (@"Rider laps: %ld", selectedRiderLaps);
 }
 
 - (void)logRiderInfo
@@ -254,6 +276,10 @@
     self.repeatingTimer = timer;
 
     [self enableButtons:YES];
+    
+    if(self.disableScreenSleep){
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
+    }
 
 }
 
@@ -270,6 +296,11 @@
     
     self.bStopped = YES;
     [self enableButtons:NO];
+    
+    if(self.disableScreenSleep){
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
+    }
+
 }
 
 - (void) enableButtons:(bool)start {
@@ -306,7 +337,7 @@
     
     
     self.riderNumberLabel.text = self.selectedRiderID;
-    self.riderNameLabel.text = self.selectedRiderName;
+    self.riderNameLabel.text = [NSString stringWithFormat:@"Last Rider: %@", self.selectedRiderName];
     self.riderLastSeenLabel.text = [NSString stringWithFormat:@"Last Seen @: %@", lastSeenTime ];
     
     [self saveLapInfo];
