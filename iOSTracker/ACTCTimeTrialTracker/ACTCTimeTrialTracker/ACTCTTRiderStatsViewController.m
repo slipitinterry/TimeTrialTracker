@@ -9,6 +9,7 @@
 #import "ACTCTTRiderStatsViewController.h"
 #import "ACTCTTDBManager.h"
 #import "ACTCTTTimerUtils.h"
+#import "ACTCTTDataUtils.h"
 
 @interface ACTCTTRiderStatsViewController ()
 
@@ -155,20 +156,9 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0){
-        //delete it
-        NSLog(@"Deleting All of the Rider Data...");
-        
-        // Setup the delete table query string
-        NSString *dropTable = @"drop table if exists riders";
-        
-        // Execute the drop table
-        [self.dbManager executeQuery:dropTable];
-        
-        NSString *createTable = @"CREATE TABLE riders(riderID integer primary key, riderName text, laps number, last_seen number, eta number, avg_lap number, mean_diff number, std_dev number)";
 
-        // Execute the create table
-        [self.dbManager executeQuery:createTable];
-
+        [ACTCTTDataUtils clearRiderTable:self.dbManager];
+        
         // Reload the table view control
         [self loadData];
 

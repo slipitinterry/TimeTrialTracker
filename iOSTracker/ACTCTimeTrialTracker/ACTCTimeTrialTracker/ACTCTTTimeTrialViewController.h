@@ -30,4 +30,6 @@
 - (IBAction)startRiderAction:(UIButton *)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableRiderInfo;
+
+
 @end

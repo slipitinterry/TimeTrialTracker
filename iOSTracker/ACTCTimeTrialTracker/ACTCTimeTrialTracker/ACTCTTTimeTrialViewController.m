@@ -18,7 +18,7 @@
 
 @property BOOL disableScreenSleep;
 @property BOOL hideRidersAfterLastLap;
-@property int maxLaps;
+@property NSInteger maxLaps;
 
 @property NSTimeInterval elapsedTime;
 @property NSTimeInterval currentInterval;
@@ -29,12 +29,13 @@
 
 @property (nonatomic) NSString *selectedRiderID;
 @property (nonatomic) NSString *selectedRiderName;
+@property (nonatomic, getter = isRiderSelected) BOOL riderSelected;
 
 @property (weak) NSTimer *repeatingTimer;
 
 - (NSDictionary *)userInfo;
 - (void)targetMethod:(NSTimer*)theTimer;
-- (int)queryNumberOfLapsForRider:(NSString*)riderID;
+- (NSInteger)queryNumberOfLapsForRider:(NSString*)riderID;
 - (void)updateAverageLapAndETAForRider:(NSString*)riderID;
 
 
@@ -47,7 +48,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarController.delegate = self;
     }
     return self;
 }
@@ -67,6 +67,12 @@
     // Make self the delegate and datasource of the table view.
     self.tableRiderInfo.delegate = self;
     self.tableRiderInfo.dataSource = self;
+    id tabController = [self parentViewController];
+    if( [tabController isKindOfClass:[UITabBarController class]] )
+    {
+        UITabBarController *tab = tabController;
+        tab.delegate = self;
+    }
 
     // Initialize the dbManager property.
     self.dbManager = [[ACTCTTDBManager alloc] initWithDatabaseFilename:@"timetrial.db"];
@@ -92,7 +98,7 @@
     
     NSString *where = @"";
     if(self.hideRidersAfterLastLap){
-        where = [NSString stringWithFormat:@" where laps < '%d'", self.maxLaps];
+        where = [NSString stringWithFormat:@" where laps < '%ld'", self.maxLaps];
     }
     
     NSString *query = [NSString stringWithFormat:@"%@ %@ order by eta, last_seen, riderID", select, where];
@@ -108,14 +114,18 @@
     
     // Reload the table view.
     [self.tableRiderInfo reloadData];
+    
+    self.riderSelected = NO;
 }
 
 - (BOOL)tabBarController:(UITabBarController *)aTabBar
                     shouldSelectViewController:(UIViewController *)viewController
 {
-    if (![self isRunning] && (viewController != [aTabBar.viewControllers objectAtIndex:0]) )
+    NSLog(@"TabBarController:shouldSelectViewController");
+    if ([self isRunning] && (viewController != [aTabBar.viewControllers objectAtIndex:0]) )
     {
         // Disable all but the first tab.
+        NSLog(@"Disable TabBar Tabs.");
         return NO;
     }
     
@@ -185,25 +195,33 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"TableIndexPath: %@", indexPath);
     NSInteger indexOfRidername = [self.dbManager.arrColumnNames indexOfObject:@"riderName"];
+    NSLog(@"RiderNameFieldIndex: %ld", indexOfRidername);
     self.selectedRiderName = [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRidername];
 
-    NSInteger indexOfRiderLaps = [self.dbManager.arrColumnNames indexOfObject:@"laps"];
-    NSInteger selectedRiderLaps = (NSInteger) [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRiderLaps];
-    
+    NSInteger indexOfRiderID = [self.dbManager.arrColumnNames indexOfObject:@"riderID"];
+    NSLog(@"RiderIDFieldIndex: %ld", (long)indexOfRiderID);
+    self.selectedRiderID = [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRiderID];
+
+    NSString *riderID = [NSString stringWithFormat:@"%@", self.selectedRiderID];
+    NSNumber *selectedRiderLaps = [NSNumber numberWithLong:[self queryNumberOfLapsForRider:riderID]];
+    NSLog(@"Rider Laps: %@", selectedRiderLaps);
     // If we have already started a rider, they will have a non-zero lap count
     // So, change the button text to Checkin.
-    if(selectedRiderLaps < 1){
+    if([selectedRiderLaps intValue] < 1){
         [self.startRiderButton setTitle:@"Start Rider" forState:UIControlStateNormal];
     }
     else {
         [self.startRiderButton setTitle:@"Checkin Rider" forState:UIControlStateNormal];
     }
     
-    NSInteger indexOfRiderID = [self.dbManager.arrColumnNames indexOfObject:@"riderID"];
-    self.selectedRiderID = [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRiderID];
     NSLog (@"Rider selected: %@", self.selectedRiderName);
-    NSLog (@"Rider laps: %ld", selectedRiderLaps);
+    NSLog (@"Rider laps: %@", selectedRiderLaps);
+    
+    self.riderSelected = YES;
+    [self enableButtons:self.isRunning];
+    
 }
 
 - (void)logRiderInfo
@@ -323,7 +341,7 @@
     self.timerStopButton.enabled = start;
     self.timerStopButton.hidden = !start;
     
-    self.startRiderButton.enabled = start;
+    self.startRiderButton.enabled = start && self.isRiderSelected;
 
 }
 
@@ -366,9 +384,9 @@
     
     // Now we've updated the laps for this rider, get the total laps
     // and use that to update the rider record, along with the current time.
-    int numLaps = [self queryNumberOfLapsForRider:self.selectedRiderID] - 1; // lap data has start time, too.
+    NSInteger numLaps = [self queryNumberOfLapsForRider:self.selectedRiderID] - 1; // lap data has start time, too.
     [self updateAverageLapAndETAForRider:self.selectedRiderID];
-    NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set last_seen='%f', laps='%d' where riderID=%@", lapTime, numLaps, self.selectedRiderID];
+    NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set last_seen='%f', laps='%ld' where riderID=%@", lapTime, numLaps, self.selectedRiderID];
 
     // Execute the rider update.
     [self.dbManager executeQuery:updateRiderLastSeen];
@@ -385,7 +403,7 @@
     }
 }
 
-- (int)queryNumberOfLapsForRider:(NSString*)riderID{
+- (NSInteger)queryNumberOfLapsForRider:(NSString*)riderID{
     // Form the query.
     NSString *query = [NSString stringWithFormat:@"select * from laps where riderID='%@'", riderID];
     
@@ -401,8 +419,8 @@
 
 - (void)updateAverageLapAndETAForRider:(NSString*)riderID{
     
-    float riderETA;
-    float riderAvgLap;
+    NSDecimalNumber *riderETA;
+    NSDecimalNumber *riderAvgLap;
     
     // Form the query.
     NSString *query = [NSString stringWithFormat:@"select * from laps where riderID='%@'", riderID];
@@ -411,52 +429,82 @@
     
     // Get the results.
     NSArray *arrLapsForRider = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    int lapCount = [arrLapsForRider count];
+    NSInteger lapCount = [arrLapsForRider count];
     
-    NSMutableArray *arrLapSplits = [[NSMutableArray alloc]init];
+    if( lapCount > 1 ){
+        NSMutableArray *arrLapSplits = [[NSMutableArray alloc]init];
 
-    // First calculate all the lap splits, but finding the difference between successive lap
-    // entries in the lap table for this rider.
-    NSInteger indexOfLapTime = [self.dbManager.arrColumnNames indexOfObject:@"lap_split"];
-    float start = (NSInteger) [[arrLapsForRider firstObject] objectAtIndex:indexOfLapTime];
-    for( int lap = 1; lap < lapCount; lap++ ){
-        float next = (NSInteger) [[arrLapsForRider objectAtIndex:lap] objectAtIndex:indexOfLapTime];
-        float lapSplit = next - start;
-        [arrLapSplits addObject:[NSNumber numberWithFloat:lapSplit]];
-        start = next;
-    }
-    
-    int lapSplitCount = [arrLapSplits count];
-    float averageLapTime = (NSInteger) [arrLapSplits firstObject];
-    for( int lapIndex = 1; lapIndex < lapSplitCount; lapIndex++){
-        averageLapTime = averageLapTime + (NSInteger)[arrLapSplits  objectAtIndex:lapIndex];
-    }
-    
-    riderAvgLap = averageLapTime / (float)lapSplitCount;
-    NSLog(@"Total Laps: %d", lapSplitCount);
-    NSLog(@"Average Lap Interval: %f", riderAvgLap);
-    
-    riderETA = (NSInteger)[arrLapsForRider lastObject] + riderAvgLap;
-    NSLog(@"Rider ETA: %f", riderETA);
-    
-    
-    // Now run the database update
+        // First calculate all the lap splits, but finding the difference between successive lap
+        // entries in the lap table for this rider.
+        NSInteger indexOfLapTime = [self.dbManager.arrColumnNames indexOfObject:@"lap_split"];
+        NSNumber *fLap = (NSNumber *)[[arrLapsForRider firstObject] objectAtIndex:indexOfLapTime];
+        NSDecimalNumber *previous = [NSDecimalNumber decimalNumberWithDecimal:[fLap decimalValue]];
+        for( int lap = 1; lap < lapCount; lap++ ){
 
-    NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set eta='%f', avg_lap='%f' where riderID=%@", riderETA, riderAvgLap, self.selectedRiderID];
-    
-    // Execute the rider update.
-    [self.dbManager executeQuery:updateRiderLastSeen];
-    
-    // If the query was successfully executed then pop the view controller.
-    if (self.dbManager.affectedRows != 0) {
-        NSLog(@"Rider ETA & Average Lap values were updated successfully. Affected rows = %d", self.dbManager.affectedRows);
+            NSNumber *fLapNext = (NSNumber *)[[arrLapsForRider objectAtIndex:lap] objectAtIndex:indexOfLapTime];
+            NSDecimalNumber *next = [NSDecimalNumber decimalNumberWithDecimal:[fLapNext decimalValue]];
+                                     
+            NSDecimalNumber *lapSplit = [self abs:[next decimalNumberBySubtracting:previous]];
+            
+            [arrLapSplits addObject:lapSplit];
+            NSLog(@"Lap Split: %@", lapSplit);
+            previous = next;
+        }
+        
+        NSNumber *lapSplitCount = [NSNumber numberWithInteger:[arrLapSplits count]];
+        NSDecimalNumber *dnLapCount = [NSDecimalNumber decimalNumberWithDecimal:[lapSplitCount decimalValue]];
+
+        NSNumber *fLapTime = (NSNumber *) [arrLapSplits firstObject];
+        NSDecimalNumber *averageLapTime = [NSDecimalNumber decimalNumberWithDecimal:[fLapTime decimalValue]];
+        for( int lapIndex = 1; lapIndex < [lapSplitCount intValue]; lapIndex++){
+            NSNumber *fNextLapTime = (NSNumber *)[arrLapSplits  objectAtIndex:lapIndex];
+            NSDecimalNumber *nextLapTime = [NSDecimalNumber decimalNumberWithDecimal:[fNextLapTime decimalValue]];
+            averageLapTime = [averageLapTime decimalNumberByAdding:nextLapTime];
+        }
+        
+        riderAvgLap = [averageLapTime decimalNumberByDividingBy:dnLapCount];
+        NSLog(@"Total Laps: %@", lapSplitCount);
+        NSLog(@"Average Lap Interval: %@", riderAvgLap);
+        
+        NSNumber *mostRecentLapTime = [[arrLapsForRider objectAtIndex:(lapCount - 1)] objectAtIndex:indexOfLapTime];
+        NSDecimalNumber *mRLT = [NSDecimalNumber decimalNumberWithDecimal:[mostRecentLapTime decimalValue]];
+        riderETA = [mRLT decimalNumberByAdding:riderAvgLap];
+        NSLog(@"Rider ETA: %@", riderETA);
+ 
+        
+        // Now run the database update
+
+        NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set eta='%@', avg_lap='%@' where riderID=%@", riderETA, riderAvgLap, self.selectedRiderID];
+        
+        // Execute the rider update.
+        [self.dbManager executeQuery:updateRiderLastSeen];
+        
+        // If the query was successfully executed then pop the view controller.
+        if (self.dbManager.affectedRows != 0) {
+            NSLog(@"Rider ETA & Average Lap values were updated successfully. Affected rows = %d", self.dbManager.affectedRows);
+        }
+        else{
+            NSLog(@"Could not execute the Update Rider ETA & Average Lap query.");
+        }
     }
-    else{
-        NSLog(@"Could not execute the Update Rider ETA & Average Lap query.");
+    else
+    {
+        NSLog(@"Not enough laps to calculate Average and ETA.");
     }
 
 }
 
+- (NSDecimalNumber *)abs:(NSDecimalNumber *)num {
+    if ([num compare:[NSDecimalNumber zero]] == NSOrderedAscending) {
+        // Number is negative. Multiply by -1
+        NSDecimalNumber * negativeOne = [NSDecimalNumber decimalNumberWithMantissa:1
+                                                                          exponent:0
+                                                                        isNegative:YES];
+        return [num decimalNumberByMultiplyingBy:negativeOne];
+    } else {
+        return num;
+    }
+}
 
 /*
  #pragma mark - Navigation
