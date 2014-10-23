@@ -24,6 +24,7 @@
 @property NSTimeInterval currentInterval;
 
 @property (nonatomic, strong) ACTCTTDBManager *dbManager;
+@property (nonatomic, strong) ACTCTTDBManager *dbManagerForLapQuery;
 @property (nonatomic, strong) NSArray *arrRiderInfo;
 @property (nonatomic) int recordSelected;
 
@@ -76,6 +77,7 @@
 
     // Initialize the dbManager property.
     self.dbManager = [[ACTCTTDBManager alloc] initWithDatabaseFilename:@"timetrial.db"];
+    self.dbManagerForLapQuery = [[ACTCTTDBManager alloc] initWithDatabaseFilename:@"timetrial.db"];
     
     //Setup the Buttons
     [self enableButtons:NO];
@@ -98,7 +100,7 @@
     
     NSString *where = @"";
     if(self.hideRidersAfterLastLap){
-        where = [NSString stringWithFormat:@" where laps < '%ld'", self.maxLaps];
+        where = [NSString stringWithFormat:@" where laps < '%ld'", (long)self.maxLaps];
     }
     
     NSString *query = [NSString stringWithFormat:@"%@ %@ order by eta, last_seen, riderID", select, where];
@@ -197,7 +199,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"TableIndexPath: %@", indexPath);
     NSInteger indexOfRidername = [self.dbManager.arrColumnNames indexOfObject:@"riderName"];
-    NSLog(@"RiderNameFieldIndex: %ld", indexOfRidername);
+    NSLog(@"RiderNameFieldIndex: %ld", (long)indexOfRidername);
     self.selectedRiderName = [[self.arrRiderInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRidername];
 
     NSInteger indexOfRiderID = [self.dbManager.arrColumnNames indexOfObject:@"riderID"];
@@ -386,7 +388,7 @@
     // and use that to update the rider record, along with the current time.
     NSInteger numLaps = [self queryNumberOfLapsForRider:self.selectedRiderID] - 1; // lap data has start time, too.
     [self updateAverageLapAndETAForRider:self.selectedRiderID];
-    NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set last_seen='%f', laps='%ld' where riderID=%@", lapTime, numLaps, self.selectedRiderID];
+    NSString *updateRiderLastSeen = [NSString stringWithFormat:@"update riders set last_seen='%f', laps='%ld' where riderID=%@", lapTime, (long)numLaps, self.selectedRiderID];
 
     // Execute the rider update.
     [self.dbManager executeQuery:updateRiderLastSeen];
@@ -410,7 +412,7 @@
     NSLog(@"Loading Lap Count for Rider: %@", riderID);
     
     // Get the results.
-    NSArray *arrLapsForRider = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSArray *arrLapsForRider = [[NSArray alloc] initWithArray:[self.dbManagerForLapQuery loadDataFromDB:query]];
 
     return [arrLapsForRider count];
     

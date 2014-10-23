@@ -254,7 +254,7 @@
 				ORGANIZATIONNAME = "Ridgway Coders";
 				TargetAttributes = {
 					78595DFB19CBD7BC00AB835A = {
-						DevelopmentTeam = 36TX7XQTPA;
+						DevelopmentTeam = 469Q3T2DQS;
 					};
 					78595E1C19CBD7BC00AB835A = {
 						TestTargetID = 78595DFB19CBD7BC00AB835A;
